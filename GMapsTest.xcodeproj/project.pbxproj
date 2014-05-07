@@ -35,7 +35,12 @@
 		2B3EC1931913E48C00B49FAC /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3EC1881913E48C00B49FAC /* OpenGLES.framework */; };
 		2B3EC1941913E48C00B49FAC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3EC1891913E48C00B49FAC /* QuartzCore.framework */; };
 		2B3EC1951913E48C00B49FAC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3EC18A1913E48C00B49FAC /* SystemConfiguration.framework */; };
-		43B2EEFA191417BA006BEAA6 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B2EEF9191417BA006BEAA6 /* GoogleMaps.framework */; };
+		43A99F51191A7C1A00573ABF /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A99F50191A7C1A00573ABF /* libsqlite3.dylib */; };
+		43A99F54191A7C5600573ABF /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A99F53191A7C5600573ABF /* DBManager.m */; };
+		43A99F59191A85CC00573ABF /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A99F56191A85CC00573ABF /* FMDatabase.m */; };
+		43A99F5A191A85CC00573ABF /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A99F58191A85CC00573ABF /* FMResultSet.m */; };
+		43A99F5C191A88DB00573ABF /* logs.db in Resources */ = {isa = PBXBuildFile; fileRef = 43A99F5B191A88DB00573ABF /* logs.db */; };
+		43A99F5E191AA15E00573ABF /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A99F5D191AA15E00573ABF /* GoogleMaps.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,7 +87,15 @@
 		2B3EC1881913E48C00B49FAC /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		2B3EC1891913E48C00B49FAC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2B3EC18A1913E48C00B49FAC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		43B2EEF9191417BA006BEAA6 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
+		43A99F50191A7C1A00573ABF /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		43A99F52191A7C5600573ABF /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
+		43A99F53191A7C5600573ABF /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
+		43A99F55191A85CC00573ABF /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		43A99F56191A85CC00573ABF /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		43A99F57191A85CC00573ABF /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		43A99F58191A85CC00573ABF /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		43A99F5B191A88DB00573ABF /* logs.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = logs.db; sourceTree = "<group>"; };
+		43A99F5D191AA15E00573ABF /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,11 +103,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43A99F51191A7C1A00573ABF /* libsqlite3.dylib in Frameworks */,
 				2B3EC18B1913E48C00B49FAC /* CoreData.framework in Frameworks */,
 				2B3EC18C1913E48C00B49FAC /* CoreLocation.framework in Frameworks */,
 				2B3EC18D1913E48C00B49FAC /* CoreText.framework in Frameworks */,
 				2B3EC18E1913E48C00B49FAC /* GLKit.framework in Frameworks */,
 				2B3EC18F1913E48C00B49FAC /* ImageIO.framework in Frameworks */,
+				43A99F5E191AA15E00573ABF /* GoogleMaps.framework in Frameworks */,
 				2B3EC1901913E48C00B49FAC /* libc++.dylib in Frameworks */,
 				2B3EC1911913E48C00B49FAC /* libicucore.dylib in Frameworks */,
 				2B3EC1921913E48C00B49FAC /* libz.dylib in Frameworks */,
@@ -104,7 +119,6 @@
 				2B3EC17F1913E41E00B49FAC /* AVFoundation.framework in Frameworks */,
 				2B3EC1481913E27100B49FAC /* CoreGraphics.framework in Frameworks */,
 				2B3EC14A1913E27100B49FAC /* UIKit.framework in Frameworks */,
-				43B2EEFA191417BA006BEAA6 /* GoogleMaps.framework in Frameworks */,
 				2B3EC17B1913E29D00B49FAC /* GoogleMaps.framework in Frameworks */,
 				2B3EC1461913E27100B49FAC /* Foundation.framework in Frameworks */,
 			);
@@ -145,7 +159,8 @@
 		2B3EC1441913E27100B49FAC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				43B2EEF9191417BA006BEAA6 /* GoogleMaps.framework */,
+				43A99F5D191AA15E00573ABF /* GoogleMaps.framework */,
+				43A99F50191A7C1A00573ABF /* libsqlite3.dylib */,
 				2B3EC1801913E48C00B49FAC /* CoreData.framework */,
 				2B3EC1811913E48C00B49FAC /* CoreLocation.framework */,
 				2B3EC1821913E48C00B49FAC /* CoreText.framework */,
@@ -178,6 +193,12 @@
 				2B3EC15B1913E27100B49FAC /* ViewController.m */,
 				2B3EC15D1913E27100B49FAC /* Images.xcassets */,
 				2B3EC14C1913E27100B49FAC /* Supporting Files */,
+				43A99F52191A7C5600573ABF /* DBManager.h */,
+				43A99F55191A85CC00573ABF /* FMDatabase.h */,
+				43A99F56191A85CC00573ABF /* FMDatabase.m */,
+				43A99F57191A85CC00573ABF /* FMResultSet.h */,
+				43A99F58191A85CC00573ABF /* FMResultSet.m */,
+				43A99F53191A7C5600573ABF /* DBManager.m */,
 			);
 			path = GMapsTest;
 			sourceTree = "<group>";
@@ -185,6 +206,7 @@
 		2B3EC14C1913E27100B49FAC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				43A99F5B191A88DB00573ABF /* logs.db */,
 				2B3EC14D1913E27100B49FAC /* GMapsTest-Info.plist */,
 				2B3EC14E1913E27100B49FAC /* InfoPlist.strings */,
 				2B3EC1511913E27100B49FAC /* main.m */,
@@ -291,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B3EC15E1913E27100B49FAC /* Images.xcassets in Resources */,
+				43A99F5C191A88DB00573ABF /* logs.db in Resources */,
 				2B3EC1501913E27100B49FAC /* InfoPlist.strings in Resources */,
 				2B3EC1591913E27100B49FAC /* Main.storyboard in Resources */,
 				2B3EC17D1913E2F800B49FAC /* GoogleMaps.bundle in Resources */,
@@ -312,9 +335,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43A99F5A191A85CC00573ABF /* FMResultSet.m in Sources */,
 				2B3EC15C1913E27100B49FAC /* ViewController.m in Sources */,
 				2B3EC1561913E27100B49FAC /* AppDelegate.m in Sources */,
 				2B3EC1521913E27100B49FAC /* main.m in Sources */,
+				43A99F59191A85CC00573ABF /* FMDatabase.m in Sources */,
+				43A99F54191A7C5600573ABF /* DBManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

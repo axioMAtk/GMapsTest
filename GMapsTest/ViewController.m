@@ -158,11 +158,11 @@
     //distance.text = tripString;
     [path addCoordinate:CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude)];
     [latArray addObject:currentLatitude];
-    NSLog(@"latArray: %@", latArray);
+    //NSLog(@"latArray: %@", latArray);
     [longArray addObject:currentLongitude];
-    NSLog(@"longArray: %@", longArray);
+    //NSLog(@"longArray: %@", longArray);
     [altArray addObject:currentAltitude];
-    NSLog(@"altArray: %@", altArray);
+    //NSLog(@"altArray: %@", altArray);
     GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
     polyline.map = mapView_;
     

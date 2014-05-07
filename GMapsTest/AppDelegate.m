@@ -9,13 +9,36 @@
 #import "AppDelegate.h"
 
 @implementation AppDelegate
+@synthesize databaseName;
+@synthesize databasePath;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     [GMSServices provideAPIKey:@"AIzaSyAlDakcBveHB6pyPqqkU-6RbHO2pGFiT2g"];
+    self.databaseName = @"logs.db";
+    NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDir = [documentPaths objectAtIndex:0];
+    self.databasePath = [documentDir stringByAppendingPathComponent:self.databaseName];
+    [self createAndCheckDatabase];
     return YES;
 }
+
+-(void) createAndCheckDatabase
+{
+    BOOL success;
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    success = [fileManager fileExistsAtPath:databasePath];
+    
+    if(success) return;
+    
+    NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:self.databaseName];
+    NSLog(@"altArray: %@", @"I did stuff");
+    
+    [fileManager copyItemAtPath:databasePathFromApp toPath:databasePath error:nil];
+}
+
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
