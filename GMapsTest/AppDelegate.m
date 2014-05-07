@@ -7,37 +7,38 @@
 //
 
 #import "AppDelegate.h"
+#import "sqlite3.h"
+#import "FMDatabase.h"
 
 @implementation AppDelegate
-@synthesize databaseName;
-@synthesize databasePath;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     [GMSServices provideAPIKey:@"AIzaSyAlDakcBveHB6pyPqqkU-6RbHO2pGFiT2g"];
-    self.databaseName = @"logs.db";
-    NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentDir = [documentPaths objectAtIndex:0];
-    self.databasePath = [documentDir stringByAppendingPathComponent:self.databaseName];
-    [self createAndCheckDatabase];
+    
+    BOOL success;
+    NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDir = [docPaths objectAtIndex:0];
+    NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"logs.sqlite"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    success = [fileManager fileExistsAtPath:dbPath];
+    
+    if(success) return true;
+    
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
+    [database open];
+    [database executeUpdate:@"CREATE TABLE logs (latitude int, longitude int, elevation int)"];
+    [database close];
+    NSLog(@"created logs table in database");
+    
+    
     return YES;
 }
 
--(void) createAndCheckDatabase
-{
-    BOOL success;
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    success = [fileManager fileExistsAtPath:databasePath];
-    
-    if(success) return;
-    
-    NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:self.databaseName];
-    NSLog(@"altArray: %@", @"I did stuff");
-    
-    [fileManager copyItemAtPath:databasePathFromApp toPath:databasePath error:nil];
-}
+
 
 							
 - (void)applicationWillResignActive:(UIApplication *)application

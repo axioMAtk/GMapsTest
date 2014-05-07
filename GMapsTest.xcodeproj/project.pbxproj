@@ -39,8 +39,8 @@
 		43A99F54191A7C5600573ABF /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A99F53191A7C5600573ABF /* DBManager.m */; };
 		43A99F59191A85CC00573ABF /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A99F56191A85CC00573ABF /* FMDatabase.m */; };
 		43A99F5A191A85CC00573ABF /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A99F58191A85CC00573ABF /* FMResultSet.m */; };
-		43A99F5C191A88DB00573ABF /* logs.db in Resources */ = {isa = PBXBuildFile; fileRef = 43A99F5B191A88DB00573ABF /* logs.db */; };
 		43A99F5E191AA15E00573ABF /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A99F5D191AA15E00573ABF /* GoogleMaps.framework */; };
+		43A99F62191AAAE900573ABF /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A99F61191AAAE900573ABF /* FMDatabaseAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,8 +94,9 @@
 		43A99F56191A85CC00573ABF /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		43A99F57191A85CC00573ABF /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		43A99F58191A85CC00573ABF /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
-		43A99F5B191A88DB00573ABF /* logs.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = logs.db; sourceTree = "<group>"; };
 		43A99F5D191AA15E00573ABF /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
+		43A99F60191AAAE900573ABF /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		43A99F61191AAAE900573ABF /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +187,8 @@
 		2B3EC14B1913E27100B49FAC /* GMapsTest */ = {
 			isa = PBXGroup;
 			children = (
+				43A99F60191AAAE900573ABF /* FMDatabaseAdditions.h */,
+				43A99F61191AAAE900573ABF /* FMDatabaseAdditions.m */,
 				2B3EC1541913E27100B49FAC /* AppDelegate.h */,
 				2B3EC1551913E27100B49FAC /* AppDelegate.m */,
 				2B3EC1571913E27100B49FAC /* Main.storyboard */,
@@ -206,7 +209,6 @@
 		2B3EC14C1913E27100B49FAC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				43A99F5B191A88DB00573ABF /* logs.db */,
 				2B3EC14D1913E27100B49FAC /* GMapsTest-Info.plist */,
 				2B3EC14E1913E27100B49FAC /* InfoPlist.strings */,
 				2B3EC1511913E27100B49FAC /* main.m */,
@@ -313,7 +315,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B3EC15E1913E27100B49FAC /* Images.xcassets in Resources */,
-				43A99F5C191A88DB00573ABF /* logs.db in Resources */,
 				2B3EC1501913E27100B49FAC /* InfoPlist.strings in Resources */,
 				2B3EC1591913E27100B49FAC /* Main.storyboard in Resources */,
 				2B3EC17D1913E2F800B49FAC /* GoogleMaps.bundle in Resources */,
@@ -340,6 +341,7 @@
 				2B3EC1561913E27100B49FAC /* AppDelegate.m in Sources */,
 				2B3EC1521913E27100B49FAC /* main.m in Sources */,
 				43A99F59191A85CC00573ABF /* FMDatabase.m in Sources */,
+				43A99F62191AAAE900573ABF /* FMDatabaseAdditions.m in Sources */,
 				43A99F54191A7C5600573ABF /* DBManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

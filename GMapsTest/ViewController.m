@@ -9,6 +9,9 @@
 #import "ViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import "CoreLocation/CoreLocation.h"
+#import "sqlite3.h"
+#import "FMDatabase.h"
+
 
 @interface ViewController ()
 
@@ -57,6 +60,8 @@
     //GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.86
       //                                                      longitude:151.20
         //                                                         zoom:6];
+    
+    
     altArray = [[NSMutableArray alloc] init];
     latArray = [[NSMutableArray alloc] init];
     longArray = [[NSMutableArray alloc] init];
@@ -165,6 +170,14 @@
     //NSLog(@"altArray: %@", altArray);
     GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
     polyline.map = mapView_;
+    NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDir = [docPaths objectAtIndex:0];
+    NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"logs.sqlite"];
+    FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
+    
+    [database open];
+    [database executeUpdate:@"INSERT INTO logs (latitude, longitude, elevation) VALUES (?, ?, ?)", currentLatitude, currentLongitude, currentAltitude , nil];
+    [database close];
     
 }
 
