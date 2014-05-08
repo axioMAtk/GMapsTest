@@ -185,7 +185,7 @@
     FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
     
     [database open];
-    [database executeUpdate:@"INSERT INTO logs (latitude, longitude, elevation, time) VALUES (?, ?, ?, ?)", currentLatitude, currentLongitude, currentAltitude, dateString, nil];
+    [database executeUpdate:@"INSERT INTO logs (latitude, longitude, elevation, horizontalAccuracy, verticalAccuracy, time) VALUES (?, ?, ?, ?, ?, ?)", currentLatitude, currentLongitude, currentAltitude, currentHorizontalAccuracy, currentVerticalAccuracy, dateString, nil];
     [database close];
     
 }
