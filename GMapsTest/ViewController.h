@@ -18,5 +18,7 @@
 @property (strong, nonatomic) NSMutableArray *longArray;
 @property (strong, nonatomic) NSMutableArray *altArray;
 @property (strong, nonatomic) GMSMutablePath *path;
+//@property (strong, nonatomic) GMSCoordinateBounds *pathscreen;
+//@property (strong, nonatomic) GMSCameraUpdate *pathcam;
 
 @end

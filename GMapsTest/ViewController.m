@@ -27,11 +27,13 @@
 @synthesize longArray;
 @synthesize latArray;
 @synthesize path;
+//@synthesize pathscreen;
+//@synthesize pathcam;
 
 - (void)viewDidLoad {
     [self loadSoups];
     // Create a GMSCameraPosition that tells the map to display the
-    // coordinate -33.86,151.20 at zoom level 6.
+    // coordinate -33.85,151.20 at zoom level 15.
     locationManager = [[CLLocationManager alloc] init];
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.delegate = self;
@@ -170,6 +172,11 @@
     //NSLog(@"altArray: %@", altArray);
     GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
     polyline.map = mapView_;
+
+    //Creates CoordinateBounds that show the entire path and sets camera to display those bounds
+    GMSCoordinateBounds *pathscreen = [[GMSCoordinateBounds alloc] initWithPath:path];
+    GMSCameraUpdate *pathcam = [GMSCameraUpdate fitBounds:pathscreen];
+    [mapView_ animateWithCameraUpdate:pathcam];
     
     NSDateFormatter *gmtDateFormatter = [[NSDateFormatter alloc] init];
     gmtDateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
