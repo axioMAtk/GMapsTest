@@ -2,8 +2,8 @@
 //  ViewController.m
 //  GMapsTest
 //
-//  Created by Chris Sutton on 5/2/14.
-//  Copyright (c) 2014 Chris Sutton. All rights reserved.
+//  Created by Chris Sutton and Nate Lundie on 5/2/14.
+//  Copyright (c) 2014 Chris Sutton and Nate Lundie. All rights reserved.
 //
 
 #import "ViewController.h"
