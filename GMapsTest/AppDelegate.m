@@ -30,7 +30,7 @@
     
     FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
     [database open];
-    [database executeUpdate:@"CREATE TABLE logs (latitude int, longitude int, elevation int)"];
+    [database executeUpdate:@"CREATE TABLE logs (latitude int, longitude int, elevation int, time datetime)"];
     [database close];
     NSLog(@"created logs table in database");
     

@@ -170,13 +170,22 @@
     //NSLog(@"altArray: %@", altArray);
     GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
     polyline.map = mapView_;
+    
+    NSDateFormatter *gmtDateFormatter = [[NSDateFormatter alloc] init];
+    gmtDateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    gmtDateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    
+    NSDate *now = [NSDate date];
+    
+    NSString *dateString = [gmtDateFormatter stringFromDate:now];
+    
     NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDir = [docPaths objectAtIndex:0];
     NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"logs.sqlite"];
     FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
     
     [database open];
-    [database executeUpdate:@"INSERT INTO logs (latitude, longitude, elevation) VALUES (?, ?, ?)", currentLatitude, currentLongitude, currentAltitude , nil];
+    [database executeUpdate:@"INSERT INTO logs (latitude, longitude, elevation, time) VALUES (?, ?, ?, ?)", currentLatitude, currentLongitude, currentAltitude, dateString, nil];
     [database close];
     
 }
