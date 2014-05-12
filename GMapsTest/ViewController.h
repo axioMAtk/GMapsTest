@@ -18,5 +18,11 @@
 @property (strong, nonatomic) NSMutableArray *longArray;
 @property (strong, nonatomic) NSMutableArray *altArray;
 @property (strong, nonatomic) GMSMutablePath *path;
+@property (strong, nonatomic) NSMutableArray* log;
+@property (strong, nonatomic) NSMutableArray* JSONlog;
+@property (strong, nonatomic) NSString* JSONString;
+@property (strong, nonatomic) NSString* countString;
+
+
 
 @end

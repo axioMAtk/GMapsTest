@@ -11,6 +11,7 @@
 #import "CoreLocation/CoreLocation.h"
 #import "sqlite3.h"
 #import "FMDatabase.h"
+#import "FMDatabaseAdditions.h"
 
 
 @interface ViewController ()
@@ -27,6 +28,10 @@
 @synthesize longArray;
 @synthesize latArray;
 @synthesize path;
+@synthesize log;
+@synthesize JSONlog;
+@synthesize JSONString;
+@synthesize countString;
 
 - (void)viewDidLoad {
     [self loadSoups];
@@ -65,6 +70,30 @@
     altArray = [[NSMutableArray alloc] init];
     latArray = [[NSMutableArray alloc] init];
     longArray = [[NSMutableArray alloc] init];
+    log = [[NSMutableArray alloc] init];
+    JSONlog = [[NSMutableArray alloc] init];
+    //JSONString = [[NSString alloc] init];
+    NSDateFormatter *gmtDateFormatter = [[NSDateFormatter alloc] init];
+    gmtDateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    gmtDateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    
+    NSDate *now = [NSDate date];
+    
+    NSString *dateString = [gmtDateFormatter stringFromDate:now];
+    
+    NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDir = [docPaths objectAtIndex:0];
+    NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"base.sqlite"];
+    FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
+    
+    [database open];
+     NSUInteger count = [database intForQuery:@"SELECT COUNT(rowid) FROM hikes"];
+    [database executeUpdate:@"INSERT INTO hikes (time) VALUES (?)", dateString, nil];
+    countString = [NSString stringWithFormat:@"%d", count];
+    NSString *logsString = [NSString stringWithFormat:@"logs%@", countString];
+    NSString *queryString = [NSString stringWithFormat:@"CREATE TABLE logs%@ (latitude int, longitude int, elevation int, horizontalAccuracy int, verticalAccuracy int, time datetime)", countString];
+    [database executeUpdate:queryString];
+    [database close];
 
     
 }
@@ -168,6 +197,10 @@
     //NSLog(@"longArray: %@", longArray);
     [altArray addObject:currentAltitude];
     //NSLog(@"altArray: %@", altArray);
+    
+    
+    
+    
     GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
     polyline.map = mapView_;
     
@@ -179,15 +212,86 @@
     
     NSString *dateString = [gmtDateFormatter stringFromDate:now];
     
+    
+    
     NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDir = [docPaths objectAtIndex:0];
-    NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"logs.sqlite"];
+    NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"base.sqlite"];
     FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
     
     [database open];
-    [database executeUpdate:@"INSERT INTO logs (latitude, longitude, elevation, horizontalAccuracy, verticalAccuracy, time) VALUES (?, ?, ?, ?, ?, ?)", currentLatitude, currentLongitude, currentAltitude, currentHorizontalAccuracy, currentVerticalAccuracy, dateString, nil];
+    NSString *nqueryString = [NSString stringWithFormat:@"INSERT INTO logs%@ (latitude, longitude, elevation, horizontalAccuracy, verticalAccuracy, time) VALUES (?, ?, ?, ?, ?, ?)", countString];
+    [database executeUpdate:nqueryString, currentLatitude, currentLongitude, currentAltitude, currentHorizontalAccuracy, currentVerticalAccuracy, dateString, nil];
     [database close];
     
+    NSMutableDictionary *theDictionary = [[NSMutableDictionary alloc] init];
+    [theDictionary setObject:currentLatitude forKey:@"latitude"];
+    [theDictionary setObject:currentLongitude forKey:@"longitude"];
+    [theDictionary setObject:currentAltitude forKey:@"elevation"];
+    [theDictionary setObject:currentHorizontalAccuracy forKey:@"horizontalAccuracy"];
+    [theDictionary setObject:currentVerticalAccuracy forKey:@"verticalAccuracy"];
+    [theDictionary setObject:dateString forKey:@"time"];
+    [log addObject:theDictionary];
+    
+    NSError *error;
+    NSData * JSONData = [NSJSONSerialization dataWithJSONObject:log
+                                                        options:0
+                                                        error:&error];
+    
+    JSONString = [[NSString alloc] initWithData:JSONData encoding:NSUTF8StringEncoding];
+    
+    [JSONlog addObject:JSONData];
+    
+    
+    //for(int indexvalue=0; indexvalue<log.count; indexvalue++)
+    //{
+        //NSLog(@"dictionary values: %@", theDictionary);
+        //NSLog(@"log Array values: %@", log.lastObject);
+        //NSLog(@"Json values: %@", JSONlog.lastObject);
+        //NSLog(JSONString);
+    //}
+    NSURL *url = [NSURL URLWithString:@"http://www.hikingnex.us/phpshizz/sendLog.php"];
+    
+    NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
+                                                              cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                                          timeoutInterval:60];
+    
+    [theRequest setHTTPMethod:@"POST"];
+    [theRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    NSString *postData = JSONString;
+    
+    NSString *length = [NSString stringWithFormat:@"%d", [postData length]];
+    [theRequest setValue:length forHTTPHeaderField:@"Content-Length"];
+    
+    [theRequest setHTTPBody:[postData dataUsingEncoding:NSASCIIStringEncoding]];
+    
+   // NSURLConnection *sConnection = [NSURLConnection connectionWithRequest:theRequest delegate:self];
+    //[sConnection start];
+    //NSlog(@"stuf%@", theRequest.accessibilityValue);
+    
+}
+
+-(void) sendStuff
+{
+    NSURL *url = [NSURL URLWithString:@"http://www.hikingnex.us/phpshizz/sendLog.php"];
+    
+    NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
+                                                              cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                                          timeoutInterval:60];
+    
+    [theRequest setHTTPMethod:@"POST"];
+    [theRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    NSString *postData = JSONString;
+    
+    NSString *length = [NSString stringWithFormat:@"%d", [postData length]];
+    [theRequest setValue:length forHTTPHeaderField:@"Content-Length"];
+    
+    [theRequest setHTTPBody:[postData dataUsingEncoding:NSASCIIStringEncoding]];
+    
+    NSURLConnection *sConnection = [NSURLConnection connectionWithRequest:theRequest delegate:self];
+    [sConnection start];
 }
 
 @end

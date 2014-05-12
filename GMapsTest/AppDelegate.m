@@ -21,7 +21,7 @@
     BOOL success;
     NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDir = [docPaths objectAtIndex:0];
-    NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"logs.sqlite"];
+    NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"base.sqlite"];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     success = [fileManager fileExistsAtPath:dbPath];
     
@@ -30,9 +30,9 @@
     
     FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
     [database open];
-    [database executeUpdate:@"CREATE TABLE logs (latitude int, longitude int, elevation int, horizontalAccuracy int, verticalAccuracy int, time datetime)"];
+    [database executeUpdate:@"CREATE TABLE hikes (number INTEGER PRIMARY KEY AUTOINCREMENT, time datetime)"];
     [database close];
-    NSLog(@"created logs table in database");
+    NSLog(@"created hikes table in database");
     
     
     return YES;
