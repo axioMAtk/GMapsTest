@@ -2,8 +2,8 @@
 //  DBManager.h
 //  GMapsTest
 //
-//  Created by Nate Lundie on 5/7/14.
-//  Copyright (c) 2014 Chris Sutton. All rights reserved.
+//  Created by Chris Sutton and Nate Lundie on 5/7/14.
+//  Copyright (c) 2014 Chris Sutton and Nate Lundie. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

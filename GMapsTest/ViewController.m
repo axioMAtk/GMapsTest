@@ -2,8 +2,8 @@
 //  ViewController.m
 //  GMapsTest
 //
-//  Created by Chris Sutton on 5/2/14.
-//  Copyright (c) 2014 Chris Sutton. All rights reserved.
+//  Created by Chris Sutton and Nate Lundie on 5/2/14.
+//  Copyright (c) 2014 Chris Sutton and Nate Lundie. All rights reserved.
 //
 
 #import "ViewController.h"
@@ -36,7 +36,7 @@
 - (void)viewDidLoad {
     [self loadSoups];
     // Create a GMSCameraPosition that tells the map to display the
-    // coordinate -33.86,151.20 at zoom level 6.
+    // coordinate -33.85,151.20 at zoom level 15.
     locationManager = [[CLLocationManager alloc] init];
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.delegate = self;
@@ -203,6 +203,11 @@
     
     GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
     polyline.map = mapView_;
+
+    //Creates CoordinateBounds that show the entire path and sets camera to display those bounds
+    GMSCoordinateBounds *pathscreen = [[GMSCoordinateBounds alloc] initWithPath:path];
+    GMSCameraUpdate *pathcam = [GMSCameraUpdate fitBounds:pathscreen];
+    [mapView_ animateWithCameraUpdate:pathcam];
     
     NSDateFormatter *gmtDateFormatter = [[NSDateFormatter alloc] init];
     gmtDateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
