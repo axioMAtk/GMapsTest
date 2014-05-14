@@ -4,6 +4,56 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
+        <!--Data View Controller-->
+        <scene sceneID="jfG-l9-V4o">
+            <objects>
+                <viewController id="BNt-RB-iwO" customClass="DataViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IjT-d3-LNy"/>
+                        <viewControllerLayoutGuide type="bottom" id="1pK-60-p8j"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZYi-Q2-NyP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sH8-sj-iiT">
+                                <rect key="frame" x="113" y="190" width="95" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Show on map">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="JHm-nH-d6L" kind="push" id="0jN-Ch-8BK"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="TSZ-sU-BGT"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F0X-GP-r8U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="158" y="-506"/>
+        </scene>
+        <!--Past Map View Controller-->
+        <scene sceneID="c0c-gB-SGD">
+            <objects>
+                <viewController id="JHm-nH-d6L" customClass="PastMapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5oe-e7-13m"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vkj-xg-nBC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hSC-U4-kbH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="nYM-ow-OwY"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Si-1M-HWM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="576" y="-506"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -38,10 +88,10 @@
             </objects>
             <point key="canvasLocation" x="-1022" y="135"/>
         </scene>
-        <!--View Controller-->
+        <!--Home Screen View Controller-->
         <scene sceneID="tCQ-od-aD0">
             <objects>
-                <viewController id="Q8H-yz-Tdp" sceneMemberID="viewController">
+                <viewController id="Q8H-yz-Tdp" customClass="HomeScreenViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3jW-C3-ADG"/>
                         <viewControllerLayoutGuide type="bottom" id="t21-xB-789"/>
@@ -58,6 +108,26 @@
                                 </state>
                                 <connections>
                                     <segue destination="vXZ-lx-hvc" kind="push" id="MJr-Ni-Bz2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mx2-Eg-QAV">
+                                <rect key="frame" x="124" y="344" width="74" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Past Hikes">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BNt-RB-iwO" kind="push" id="bB2-GC-PrE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7Z-WB-v4J">
+                                <rect key="frame" x="137" y="433" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonPushed:" destination="Q8H-yz-Tdp" eventType="touchUpInside" id="rzD-WY-i13"/>
                                 </connections>
                             </button>
                         </subviews>

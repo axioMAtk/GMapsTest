@@ -91,7 +91,7 @@
     [database executeUpdate:@"INSERT INTO hikes (time) VALUES (?)", dateString, nil];
     countString = [NSString stringWithFormat:@"%d", count];
     NSString *logsString = [NSString stringWithFormat:@"logs%@", countString];
-    NSString *queryString = [NSString stringWithFormat:@"CREATE TABLE logs%@ (latitude int, longitude int, elevation int, horizontalAccuracy int, verticalAccuracy int, time datetime)", countString];
+    NSString *queryString = [NSString stringWithFormat:@"CREATE TABLE logs%@ (latitude Double, longitude Double, elevation Double, horizontalAccuracy Double, verticalAccuracy Double, time datetime)", countString];
     [database executeUpdate:queryString];
     [database close];
 
