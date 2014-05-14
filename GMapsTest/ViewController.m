@@ -245,7 +245,7 @@
     
     JSONString = [[NSString alloc] initWithData:JSONData encoding:NSUTF8StringEncoding];
     
-    [JSONlog addObject:JSONData];
+    //[JSONlog addObject:JSONData];
     
     
     //for(int indexvalue=0; indexvalue<log.count; indexvalue++)

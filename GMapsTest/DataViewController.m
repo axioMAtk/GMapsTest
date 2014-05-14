@@ -73,6 +73,53 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)sendStuffPlaces:(id)sender {
+   
+    NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDir = [docPaths objectAtIndex:0];
+    NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"base.sqlite"];
+    FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
+    NSMutableArray *results = [NSMutableArray array];
+    
+    [database open];
+    
+    FMResultSet *hikeResults = [database executeQuery:@"SELECT * FROM logs8"];
+    while ([hikeResults next]) {
+        [results addObject:[hikeResults resultDictionary]];
+    }
+    
+    [database close];
+    
+    NSError *error;
+    NSData * JSONData = [NSJSONSerialization dataWithJSONObject:results
+                                                        options:0
+                                                          error:&error];
+    
+    NSString *JSONString = [[NSString alloc] initWithData:JSONData encoding:NSUTF8StringEncoding];
+    
+    
+    NSURL *url = [NSURL URLWithString:@"http://www.hikingnex.us/phpshizz/sendLog.php"];
+    
+    NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
+                                                              cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                                          timeoutInterval:60];
+    
+    [theRequest setHTTPMethod:@"POST"];
+    [theRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    NSString *postData = JSONString;
+    
+    NSString *length = [NSString stringWithFormat:@"%d", [postData length]];
+    [theRequest setValue:length forHTTPHeaderField:@"Content-Length"];
+    
+    [theRequest setHTTPBody:[postData dataUsingEncoding:NSASCIIStringEncoding]];
+    
+    NSURLConnection *sConnection = [NSURLConnection connectionWithRequest:theRequest delegate:self];
+    [sConnection start];
+    
+    
+}
+
 
 /*
 #pragma mark - Navigation
