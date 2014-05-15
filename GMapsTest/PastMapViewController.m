@@ -12,6 +12,7 @@
 #import "sqlite3.h"
 #import "FMDatabase.h"
 #import "FMDatabaseAdditions.h"
+#import "AppDelegate.h"
 
 @interface PastMapViewController ()
 
@@ -22,6 +23,7 @@
 }
 
 @synthesize path;
+//@synthesize dbString;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,6 +38,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    NSString *dbString = appDelegate.dbString;
+    NSString *dbQuery = [NSString stringWithFormat:@"SELECT * FROM %@", dbString];
     
     
     NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -45,8 +50,9 @@
     NSMutableArray *results = [NSMutableArray array];
     
     [database open];
+    //NSString *dbQuery = [NSString stringWithFormat:@"SELECT * FROM logs8"];
     
-    FMResultSet *hikeResults = [database executeQuery:@"SELECT * FROM logs8"];
+    FMResultSet *hikeResults = [database executeQuery:dbQuery];
     while ([hikeResults next]) {
         [results addObject:[hikeResults resultDictionary]];
     }

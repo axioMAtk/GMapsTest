@@ -10,6 +10,8 @@
 #import "sqlite3.h"
 #import "FMDatabase.h"
 #import "FMDatabaseAdditions.h"
+#import "AppDelegate.h"
+//#import "PastMapViewController.h"
 
 @interface DataViewController ()
 
@@ -19,6 +21,8 @@
 
 
 @synthesize lastHike;
+@synthesize hikePicker;
+@synthesize dbString;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,7 +57,9 @@
     
     [database close];
     
-    
+    hikePicker.delegate=self;
+    hikePicker.dataSource=self;
+        
     
     
     /*NSMutableDictionary *theDictionary = [[NSMutableDictionary alloc] init];
@@ -82,8 +88,9 @@
     NSMutableArray *results = [NSMutableArray array];
     
     [database open];
+    NSString *dbQuery = [NSString stringWithFormat:@"SELECT * FROM %@", dbString];
     
-    FMResultSet *hikeResults = [database executeQuery:@"SELECT * FROM logs8"];
+    FMResultSet *hikeResults = [database executeQuery:dbQuery];
     while ([hikeResults next]) {
         [results addObject:[hikeResults resultDictionary]];
     }
@@ -120,16 +127,75 @@
     
 }
 
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    
+    return 1;
+    
+}
 
-/*
-#pragma mark - Navigation
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent: (NSInteger)component
+{
+    
+    NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDir = [docPaths objectAtIndex:0];
+    NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"base.sqlite"];
+    FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
+    
+    [database open];
+    NSUInteger count = [database intForQuery:@"SELECT COUNT(number) FROM hikes"];
+    [database close];
+    
+    
+    return count;
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row   forComponent:(NSInteger)component
+{
+    NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDir = [docPaths objectAtIndex:0];
+    NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"base.sqlite"];
+    FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
+    NSMutableArray *results = [NSMutableArray array];
+    
+    [database open];
+    
+    FMResultSet *hikeResults = [database executeQuery:@"SELECT * FROM hikes"];
+    while ([hikeResults next]) {
+        [results addObject:[hikeResults resultDictionary]];
+    }
+    
+    [database close];
+    
+    return [[results objectAtIndex:row] objectForKey:@"time"];
+    
+    
+    //return [colorArray objectAtIndex:row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row   inComponent:(NSInteger)component
+{
+    NSLog(@"Selected Row %ld", (long)row);
+    dbString = [NSMutableString stringWithFormat:@"logs%ld", (long)row];
+    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    appDelegate.dbString = dbString;
+    
+}
+
+
+
+
+//#pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+/*- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+    if ([segue.identifier isEqualToString:@"mapSegue"]) {
+       // NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        PastMapViewController *destViewController = segue.destinationViewController;
+        destViewController.dbString = dbString;
+    }
+}*/
+
 
 @end

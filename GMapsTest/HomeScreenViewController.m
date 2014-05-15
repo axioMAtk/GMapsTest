@@ -68,7 +68,7 @@
 - (IBAction)buttonPushed:(id)sender {
     
     
-    /*NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDir = [docPaths objectAtIndex:0];
     NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"base.sqlite"];
     FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
@@ -82,7 +82,7 @@
     }
     [database close];
     
-    NSLog(@"stuff: %@", hikeResults);*/
+    NSLog(@"stuff: %@", hikeResults);
     
     
 }

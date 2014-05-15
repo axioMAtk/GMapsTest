@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DataViewController : UIViewController
+@interface DataViewController : UIViewController <UIPickerViewDataSource,UIPickerViewDelegate>
 @property (strong, nonatomic) NSMutableArray* lastHike;
+@property (strong, nonatomic) IBOutlet UIPickerView *hikePicker;
+@property (strong, nonatomic) NSMutableString* dbString;
+
 
 
 @end
