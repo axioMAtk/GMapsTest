@@ -33,8 +33,16 @@
     return self;
 }
 
+- (void)willMoveToParentViewController:(UIViewController *)parent
+{
+    if (![parent isEqual:self.parentViewController]) {
+        [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    }
+}
+
 - (void)viewDidLoad
 {
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     

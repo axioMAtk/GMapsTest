@@ -34,6 +34,7 @@
 @synthesize countString;
 
 - (void)viewDidLoad {
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
     [self loadSoups];
     // Create a GMSCameraPosition that tells the map to display the
     // coordinate -33.85,151.20 at zoom level 15.
@@ -275,6 +276,13 @@
     //[sConnection start];
     //NSlog(@"stuf%@", theRequest.accessibilityValue);
     
+}
+
+- (void)willMoveToParentViewController:(UIViewController *)parent
+{
+    if (![parent isEqual:self.parentViewController]) {
+        [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    }
 }
 
 -(void) sendStuff
