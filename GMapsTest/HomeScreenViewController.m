@@ -37,7 +37,7 @@ didTapInfoWindowOfMarker:(GMSMarker *)marker{
     [mapView_ moveCamera:vancouverCam];
     amarker = [[GMSMarker alloc] init];
     amarker.position = CLLocationCoordinate2DMake(location.coordinate.latitude,location.coordinate.longitude);
-    amarker.snippet = @"Click to Start";
+    amarker.snippet = @"Tap to Start";
     amarker.title = @"New Hike";
     amarker.map = mapView_;
     [hsLocationManager stopUpdatingLocation];
@@ -62,10 +62,11 @@ didChangeCameraPosition:(GMSCameraPosition *)position;
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.85
                                                             longitude:151.20
                                                                  zoom:11];
-    mapView_.mapType = kGMSTypeSatellite;
     mapView_ = [GMSMapView mapWithFrame:self.view.bounds camera:camera];
+    mapView_.mapType = kGMSTypeSatellite;
     mapView_.delegate=self;
     [self.view insertSubview:mapView_ atIndex:0];
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

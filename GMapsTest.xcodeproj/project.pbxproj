@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B394A341925958900D7D8CA /* HikingNexusHeaderDraft.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B394A331925958900D7D8CA /* HikingNexusHeaderDraft.png */; };
 		2B3EC1461913E27100B49FAC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3EC1451913E27100B49FAC /* Foundation.framework */; };
 		2B3EC1481913E27100B49FAC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3EC1471913E27100B49FAC /* CoreGraphics.framework */; };
 		2B3EC14A1913E27100B49FAC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3EC1491913E27100B49FAC /* UIKit.framework */; };
@@ -57,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B394A331925958900D7D8CA /* HikingNexusHeaderDraft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HikingNexusHeaderDraft.png; path = ../../HikingNexusHeaderDraft.png; sourceTree = "<group>"; };
 		2B3EC1421913E27100B49FAC /* GMapsTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GMapsTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B3EC1451913E27100B49FAC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2B3EC1471913E27100B49FAC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -210,6 +212,7 @@
 				2B3EC15A1913E27100B49FAC /* ViewController.h */,
 				2B3EC15B1913E27100B49FAC /* ViewController.m */,
 				2B3EC15D1913E27100B49FAC /* Images.xcassets */,
+				2B394A331925958900D7D8CA /* HikingNexusHeaderDraft.png */,
 				2B3EC14C1913E27100B49FAC /* Supporting Files */,
 				43A99F52191A7C5600573ABF /* DBManager.h */,
 				43A99F55191A85CC00573ABF /* FMDatabase.h */,
@@ -329,6 +332,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B394A341925958900D7D8CA /* HikingNexusHeaderDraft.png in Resources */,
 				2B3EC15E1913E27100B49FAC /* Images.xcassets in Resources */,
 				2B3EC1501913E27100B49FAC /* InfoPlist.strings in Resources */,
 				2B3EC1591913E27100B49FAC /* Main.storyboard in Resources */,
