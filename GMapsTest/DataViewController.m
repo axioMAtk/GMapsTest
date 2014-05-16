@@ -29,10 +29,19 @@
     return self;
 }
 
+- (void)willMoveToParentViewController:(UIViewController *)parent
+{
+    if (![parent isEqual:self.parentViewController]) {
+        [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
     
     NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDir = [docPaths objectAtIndex:0];

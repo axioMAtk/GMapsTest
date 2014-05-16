@@ -66,7 +66,7 @@ didChangeCameraPosition:(GMSCameraPosition *)position;
     mapView_.mapType = kGMSTypeSatellite;
     mapView_.delegate=self;
     [self.view insertSubview:mapView_ atIndex:0];
-    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    [[self navigationController] setNavigationBarHidden:YES animated:NO];
 }
 
 - (void)didReceiveMemoryWarning
