@@ -136,7 +136,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="BD0-el-k0G"/>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="push" identifier="woot" id="6Mw-vI-Wg4"/>
+                        <segue destination="vXZ-lx-hvc" kind="custom" identifier="woot" customClass="NewHikeSegue" id="6Mw-vI-Wg4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qr5-BH-mfC" userLabel="First Responder" sceneMemberID="firstResponder"/>

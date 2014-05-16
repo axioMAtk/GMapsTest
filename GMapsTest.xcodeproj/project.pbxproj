@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B0CF1EC19268FCE000C2224 /* NewHikeSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0CF1EB19268FCE000C2224 /* NewHikeSegue.m */; };
 		2B3EC1461913E27100B49FAC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3EC1451913E27100B49FAC /* Foundation.framework */; };
 		2B3EC1481913E27100B49FAC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3EC1471913E27100B49FAC /* CoreGraphics.framework */; };
 		2B3EC14A1913E27100B49FAC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3EC1491913E27100B49FAC /* UIKit.framework */; };
@@ -58,6 +59,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B0CF1EA19268FCE000C2224 /* NewHikeSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewHikeSegue.h; sourceTree = "<group>"; };
+		2B0CF1EB19268FCE000C2224 /* NewHikeSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewHikeSegue.m; sourceTree = "<group>"; };
 		2B3EC1421913E27100B49FAC /* GMapsTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GMapsTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B3EC1451913E27100B49FAC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2B3EC1471913E27100B49FAC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -209,6 +212,8 @@
 				43B097041923D1BA002D7E06 /* DataViewController.m */,
 				436084AD1921404F007926C3 /* HomeScreenViewController.h */,
 				436084AE1921404F007926C3 /* HomeScreenViewController.m */,
+				2B0CF1EA19268FCE000C2224 /* NewHikeSegue.h */,
+				2B0CF1EB19268FCE000C2224 /* NewHikeSegue.m */,
 				2B3EC15A1913E27100B49FAC /* ViewController.h */,
 				2B3EC15B1913E27100B49FAC /* ViewController.m */,
 				2B3EC15D1913E27100B49FAC /* Images.xcassets */,
@@ -364,6 +369,7 @@
 				436084AF1921404F007926C3 /* HomeScreenViewController.m in Sources */,
 				43A99F62191AAAE900573ABF /* FMDatabaseAdditions.m in Sources */,
 				43A99F54191A7C5600573ABF /* DBManager.m in Sources */,
+				2B0CF1EC19268FCE000C2224 /* NewHikeSegue.m in Sources */,
 				43B097081923E11F002D7E06 /* PastMapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
