@@ -7,84 +7,72 @@
 //
 
 #import "HomeScreenViewController.h"
-#import "sqlite3.h"
-#import "FMDatabase.h"
-#import "FMDatabaseAdditions.h"
+#import <GoogleMaps/GoogleMaps.h>
+#import "CoreLocation/CoreLocation.h"
 
-@interface HomeScreenViewController ()
+@interface HomeScreenViewController () <GMSMapViewDelegate>
 
 @end
 
-@implementation HomeScreenViewController
+@implementation HomeScreenViewController{
+    GMSMapView *mapView_;
+}
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@synthesize currentcam;
+@synthesize answerButton;
+@synthesize amarker;
+
+-(void)mapView:(GMSMapView *)mapView
+didTapInfoWindowOfMarker:(GMSMarker *)marker{
+    
+    NSLog(@"bang!");
+    [self performSegueWithIdentifier:@"woot" sender:self];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+    CLLocation *location = [locations lastObject];
+    CLLocationCoordinate2D vancouver = CLLocationCoordinate2DMake(location.coordinate.latitude,location.coordinate.longitude);
+    GMSCameraUpdate *vancouverCam = [GMSCameraUpdate setTarget:vancouver];
+    [mapView_ moveCamera:vancouverCam];
+    amarker = [[GMSMarker alloc] init];
+    amarker.position = CLLocationCoordinate2DMake(location.coordinate.latitude,location.coordinate.longitude);
+    amarker.snippet = @"Tap to Start";
+    amarker.title = @"New Hike";
+    amarker.map = mapView_;
+    [hsLocationManager stopUpdatingLocation];
+    [mapView_ setSelectedMarker:amarker];
+}
+
+- (void)mapView:(GMSMapView *)mapView
+didChangeCameraPosition:(GMSCameraPosition *)position;
+{
+    /*CGRect btFrame = answerButton.frame;
+     btFrame.origin.x = mapView_.camera.target.latitude;
+     btFrame.origin.y = mapView_.camera.target.longitude;
+     answerButton.frame = btFrame;*/
 }
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDir = [docPaths objectAtIndex:0];
-    NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"base.sqlite"];
-    FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
-    NSMutableArray *results = [NSMutableArray array];
-    
-    [database open];
-    
-    FMResultSet *hikeResults = [database executeQuery:@"SELECT * FROM logs0"];
-    while ([hikeResults next]) {
-        [results addObject:[hikeResults resultDictionary]];
-    }
-    NSLog(@"stuff: %@", results);
-    
-    [database close];
-    
-    
+    hsLocationManager = [[CLLocationManager alloc] init];
+    hsLocationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    hsLocationManager.delegate = self;
+    [hsLocationManager startUpdatingLocation];
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.85
+                                                            longitude:151.20
+                                                                 zoom:11];
+    mapView_ = [GMSMapView mapWithFrame:self.view.bounds camera:camera];
+    mapView_.mapType = kGMSTypeSatellite;
+    mapView_.delegate=self;
+    [self.view insertSubview:mapView_ atIndex:0];
+    [[self navigationController] setNavigationBarHidden:YES animated:NO];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-- (IBAction)buttonPushed:(id)sender {
-    
-    
-    NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDir = [docPaths objectAtIndex:0];
-    NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"base.sqlite"];
-    FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
-    NSMutableArray *results = [NSMutableArray array];
-
-    [database open];
-    
-    FMResultSet *hikeResults = [database executeQuery:@"SELECT * FROM logs0"];
-    while ([hikeResults next]) {
-        [results addObject:[hikeResults resultDictionary]];
-    }
-    [database close];
-    
-    NSLog(@"stuff: %@", hikeResults);
-    
-    
 }
 
 @end
