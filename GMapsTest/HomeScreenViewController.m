@@ -50,8 +50,8 @@ BOOL start;
 -(void)mapView:(GMSMapView *)mapView
 didTapInfoWindowOfMarker:(GMSMarker *)marker
 {
-    [self newHike];
-    //[self performSegueWithIdentifier:@"woot" sender:self];
+    //[self newHike];
+    [self performSegueWithIdentifier:@"woot" sender:self];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
@@ -280,7 +280,7 @@ didChangeCameraPosition:(GMSCameraPosition *)position;
 - (void)willMoveToParentViewController:(UIViewController *)parent
 {
     if (![parent isEqual:self.parentViewController]) {
-        [[self navigationController] setNavigationBarHidden:YES animated:YES];
+        [[self navigationController] setNavigationBarHidden:NO animated:YES];
     }
 }
 
