@@ -127,10 +127,6 @@
                                     <segue destination="BNt-RB-iwO" kind="push" id="bB2-GC-PrE"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="HikingNexusHeaderDraft.png" translatesAutoresizingMaskIntoConstraints="NO" id="HsF-sx-pJz">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -144,9 +140,6 @@
             <point key="canvasLocation" x="-391" y="135"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="HikingNexusHeaderDraft.png" width="640" height="140"/>
-    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
