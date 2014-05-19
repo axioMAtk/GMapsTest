@@ -38,7 +38,7 @@
 		2B3EC1951913E48C00B49FAC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3EC18A1913E48C00B49FAC /* SystemConfiguration.framework */; };
 		2BCE6C3B192666A30079A1B2 /* HikingNexusHeaderDraft.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BCE6C3A192666A30079A1B2 /* HikingNexusHeaderDraft.png */; };
 		4349A3F3192A86B900E86F4F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4349A3F2192A86B900E86F4F /* Security.framework */; };
-		4349A408192A917200E86F4F /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4349A407192A917200E86F4F /* UICKeyChainStore.m */; };
+		4349A40B192A94D700E86F4F /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4349A40A192A94D700E86F4F /* UICKeyChainStore.m */; };
 		436084AF1921404F007926C3 /* HomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 436084AE1921404F007926C3 /* HomeScreenViewController.m */; };
 		43A99F51191A7C1A00573ABF /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A99F50191A7C1A00573ABF /* libsqlite3.dylib */; };
 		43A99F54191A7C5600573ABF /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A99F53191A7C5600573ABF /* DBManager.m */; };
@@ -98,8 +98,8 @@
 		2B3EC18A1913E48C00B49FAC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2BCE6C3A192666A30079A1B2 /* HikingNexusHeaderDraft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HikingNexusHeaderDraft.png; path = ../HikingNexusHeaderDraft.png; sourceTree = "<group>"; };
 		4349A3F2192A86B900E86F4F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		4349A406192A917200E86F4F /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICKeyChainStore.h; path = "../../../../Downloads/UICKeyChainStore-master/Lib/UICKeyChainStore.h"; sourceTree = "<group>"; };
-		4349A407192A917200E86F4F /* UICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICKeyChainStore.m; path = "../../../../Downloads/UICKeyChainStore-master/Lib/UICKeyChainStore.m"; sourceTree = "<group>"; };
+		4349A409192A94D700E86F4F /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICKeyChainStore.h; sourceTree = "<group>"; };
+		4349A40A192A94D700E86F4F /* UICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICKeyChainStore.m; sourceTree = "<group>"; };
 		436084AD1921404F007926C3 /* HomeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScreenViewController.h; sourceTree = "<group>"; };
 		436084AE1921404F007926C3 /* HomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScreenViewController.m; sourceTree = "<group>"; };
 		43A99F50191A7C1A00573ABF /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -208,8 +208,8 @@
 		2B3EC14B1913E27100B49FAC /* GMapsTest */ = {
 			isa = PBXGroup;
 			children = (
-				4349A406192A917200E86F4F /* UICKeyChainStore.h */,
-				4349A407192A917200E86F4F /* UICKeyChainStore.m */,
+				4349A409192A94D700E86F4F /* UICKeyChainStore.h */,
+				4349A40A192A94D700E86F4F /* UICKeyChainStore.m */,
 				43A99F60191AAAE900573ABF /* FMDatabaseAdditions.h */,
 				43A99F61191AAAE900573ABF /* FMDatabaseAdditions.m */,
 				2B3EC1541913E27100B49FAC /* AppDelegate.h */,
@@ -380,7 +380,7 @@
 				43A99F54191A7C5600573ABF /* DBManager.m in Sources */,
 				2B0CF1EC19268FCE000C2224 /* NewHikeSegue.m in Sources */,
 				43B097081923E11F002D7E06 /* PastMapViewController.m in Sources */,
-				4349A408192A917200E86F4F /* UICKeyChainStore.m in Sources */,
+				4349A40B192A94D700E86F4F /* UICKeyChainStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
