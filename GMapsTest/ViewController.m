@@ -47,7 +47,6 @@
                                                                  zoom:15];
     mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     mapView_.myLocationEnabled = YES;
-    mapView_.settings.myLocationButton = YES;
     self.view = mapView_;
     
     // Creates a marker in the center of the map.
