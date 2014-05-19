@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <GoogleMaps/GoogleMaps.h>
+@import Security;
+
 
 @interface ViewController : UIViewController <CLLocationManagerDelegate>
 @property (strong, nonatomic)NSMutableArray *elevationStuff;
@@ -22,6 +24,7 @@
 @property (strong, nonatomic) NSMutableArray* JSONlog;
 @property (strong, nonatomic) NSString* JSONString;
 @property (strong, nonatomic) NSString* countString;
+@property (nonatomic) NSUInteger hikeNumber;
 
 
 

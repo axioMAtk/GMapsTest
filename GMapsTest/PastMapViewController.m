@@ -23,6 +23,7 @@
 }
 
 @synthesize path;
+
 //@synthesize dbString;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -68,6 +69,7 @@
                                                             longitude:[[thenDictionary objectForKey:@"longitude"] doubleValue]
                                                                  zoom:5];
     mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    mapView_.mapType = kGMSTypeSatellite;
     self.view = mapView_;
     path = [[GMSMutablePath alloc] init];
     

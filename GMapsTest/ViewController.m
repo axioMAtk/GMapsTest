@@ -32,6 +32,7 @@
 @synthesize JSONlog;
 @synthesize JSONString;
 @synthesize countString;
+@synthesize hikeNumber;
 
 - (void)viewDidLoad {
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
@@ -72,6 +73,7 @@
     longArray = [[NSMutableArray alloc] init];
     log = [[NSMutableArray alloc] init];
     JSONlog = [[NSMutableArray alloc] init];
+    //hikeNumber = [[NSUInteger alloc] init];
     //JSONString = [[NSString alloc] init];
     NSDateFormatter *gmtDateFormatter = [[NSDateFormatter alloc] init];
     gmtDateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
@@ -88,11 +90,12 @@
     
     [database open];
      NSUInteger count = [database intForQuery:@"SELECT COUNT(rowid) FROM hikes"];
+    hikeNumber = count;
     [database executeUpdate:@"INSERT INTO hikes (time) VALUES (?)", dateString, nil];
     countString = [NSString stringWithFormat:@"%d", count];
     NSString *logsString = [NSString stringWithFormat:@"logs%@", countString];
-    NSString *queryString = [NSString stringWithFormat:@"CREATE TABLE logs%@ (latitude Double, longitude Double, elevation Double, horizontalAccuracy Double, verticalAccuracy Double, time datetime)", countString];
-    [database executeUpdate:queryString];
+    //NSString *queryString = [NSString stringWithFormat:@"CREATE TABLE logs%@ (latitude Double, longitude Double, elevation Double, horizontalAccuracy Double, verticalAccuracy Double, time datetime)", countString];
+    //[database executeUpdate:queryString];
     [database close];
 
     
@@ -146,29 +149,28 @@
 #pragma mark -
 #pragma mark CLLocationManagerDelegate
 
--(void)locationManager:(CLLocationManager *)manager
-   didUpdateToLocation:(CLLocation *)newLocation
-          fromLocation:(CLLocation *)oldLocation
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
+    CLLocation *location = [locations lastObject];
     NSString *currentLatitude = [[NSString alloc]
                                  initWithFormat:@"%+.6f",
-                                 newLocation.coordinate.latitude];
+                                 location.coordinate.latitude];
     //latitude.text = currentLatitude;
     
     NSString *currentLongitude = [[NSString alloc]
                                   initWithFormat:@"%+.6f",
-                                  newLocation.coordinate.longitude];
+                                  location.coordinate.longitude];
     //longitude.text = currentLongitude;
     
     NSString *currentHorizontalAccuracy =
     [[NSString alloc]
      initWithFormat:@"%+.6f",
-     newLocation.horizontalAccuracy];
+     location.horizontalAccuracy];
     //horizontalAccuracy.text = currentHorizontalAccuracy;
     
     NSString *currentAltitude = [[NSString alloc]
                                  initWithFormat:@"%+.6f",
-                                 newLocation.altitude];
+                                 location.altitude];
     //altitude.text = currentAltitude;
     //altArray = [[NSMutableArray alloc] init];
     //[altArray addObject:currentAltitude];
@@ -177,7 +179,7 @@
     NSString *currentVerticalAccuracy =
     [[NSString alloc]
      initWithFormat:@"%+.6f",
-     newLocation.verticalAccuracy];
+     location.verticalAccuracy];
     //verticalAccuracy.text = currentVerticalAccuracy;
     
     //if (startLocation == nil)
@@ -190,7 +192,7 @@
                             initWithFormat:@"%f",
                             distanceBetween];*/
     //distance.text = tripString;
-    [path addCoordinate:CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude)];
+    [path addCoordinate:CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)];
     [latArray addObject:currentLatitude];
     //NSLog(@"latArray: %@", latArray);
     [longArray addObject:currentLongitude];
@@ -225,8 +227,8 @@
     FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
     
     [database open];
-    NSString *nqueryString = [NSString stringWithFormat:@"INSERT INTO logs%@ (latitude, longitude, elevation, horizontalAccuracy, verticalAccuracy, time) VALUES (?, ?, ?, ?, ?, ?)", countString];
-    [database executeUpdate:nqueryString, currentLatitude, currentLongitude, currentAltitude, currentHorizontalAccuracy, currentVerticalAccuracy, dateString, nil];
+    NSString *nqueryString = [NSString stringWithFormat:@"INSERT INTO logs (latitude, longitude, elevation, horizontalAccuracy, verticalAccuracy, time, hikeNumber) VALUES (?, ?, ?, ?, ?, ?, ?)"];
+    [database executeUpdate:@"INSERT INTO logs (latitude, longitude, elevation, horizontalAccuracy, verticalAccuracy, time, hikeNumber) VALUES (?, ?, ?, ?, ?, ?, ?)", currentLatitude, currentLongitude, currentAltitude, currentHorizontalAccuracy, currentVerticalAccuracy, dateString, countString, nil];
     [database close];
     
     NSMutableDictionary *theDictionary = [[NSMutableDictionary alloc] init];

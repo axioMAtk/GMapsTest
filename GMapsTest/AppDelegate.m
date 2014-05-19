@@ -31,6 +31,7 @@
     FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
     [database open];
     [database executeUpdate:@"CREATE TABLE hikes (number INTEGER PRIMARY KEY AUTOINCREMENT, time datetime)"];
+    [database executeUpdate:@"CREATE TABLE logs (latitude Double, longitude Double, elevation Double, horizontalAccuracy Double, verticalAccuracy Double, time datetime, hikeNumber int)"];
     [database close];
     NSLog(@"created hikes table in database");
     
