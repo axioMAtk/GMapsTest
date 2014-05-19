@@ -11,6 +11,9 @@
 #import "FMDatabase.h"
 #import "FMDatabaseAdditions.h"
 #import "AppDelegate.h"
+#import "UICKeyChainStore.h"
+
+@import Security;
 //#import "PastMapViewController.h"
 
 @interface DataViewController ()
@@ -23,7 +26,6 @@
 @synthesize lastHike;
 @synthesize hikePicker;
 @synthesize dbString;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -46,7 +48,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    /*NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDir = [docPaths objectAtIndex:0];
     NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"base.sqlite"];
     FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
@@ -63,7 +65,7 @@
     thenDictionary = [results objectAtIndex:0];
     NSLog(@"stuff: %@", thenDictionary);
     
-    [database close];
+    [database close];*/
     
     hikePicker.delegate=self;
     hikePicker.dataSource=self;
@@ -80,6 +82,11 @@
     [log addObject:theDictionary];
     
     [database close];*/
+    
+    [UICKeyChainStore setString:@"testUser" forKey:@"username"];
+    [UICKeyChainStore setString:@"peenpeen" forKey:@"password"];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -94,9 +101,11 @@
     NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"base.sqlite"];
     FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
     NSMutableArray *results = [NSMutableArray array];
+    NSString *username = [UICKeyChainStore stringForKey:@"username"];
+    NSLog(@"username is:%@", username);
     
     [database open];
-    NSString *dbQuery = [NSString stringWithFormat:@"SELECT * FROM %@", dbString];
+    NSString *dbQuery = [NSString stringWithFormat:@"SELECT * FROM logs"];
     
     FMResultSet *hikeResults = [database executeQuery:dbQuery];
     while ([hikeResults next]) {
@@ -113,7 +122,9 @@
     NSString *JSONString = [[NSString alloc] initWithData:JSONData encoding:NSUTF8StringEncoding];
     
     
-    NSURL *url = [NSURL URLWithString:@"http://www.hikingnex.us/phpshizz/sendLog.php"];
+    NSString *stuff = [NSString stringWithFormat:@"http://www.hikingnex.us/phpshizz/sendLog.php?id=%@", username];
+    NSURL *url = [NSURL URLWithString:stuff];
+    
     
     NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
                                                               cachePolicy:NSURLRequestReloadIgnoringCacheData
