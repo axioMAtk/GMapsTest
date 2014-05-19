@@ -105,7 +105,8 @@
     NSLog(@"username is:%@", username);
     
     [database open];
-    NSString *dbQuery = [NSString stringWithFormat:@"SELECT * FROM logs"];
+    NSString *dbQuery = [NSString stringWithFormat:@"SELECT * FROM logs WHERE hasBeenSent=0"];
+    //NSString *dbQuery = [NSString stringWithFormat:@"SELECT * FROM logs"];
     
     FMResultSet *hikeResults = [database executeQuery:dbQuery];
     while ([hikeResults next]) {
@@ -142,6 +143,9 @@
     
     NSURLConnection *sConnection = [NSURLConnection connectionWithRequest:theRequest delegate:self];
     [sConnection start];
+    [database open];
+    [database executeUpdate:@"UPDATE logs SET hasBeenSent=1 WHERE hasBeenSent=0"];
+    [database close];
     
     
 }
