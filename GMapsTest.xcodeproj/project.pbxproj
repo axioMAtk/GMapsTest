@@ -221,11 +221,10 @@
 				43B097041923D1BA002D7E06 /* DataViewController.m */,
 				436084AD1921404F007926C3 /* HomeScreenViewController.h */,
 				436084AE1921404F007926C3 /* HomeScreenViewController.m */,
-				2B0CF1EA19268FCE000C2224 /* NewHikeSegue.h */,
-				2B0CF1EB19268FCE000C2224 /* NewHikeSegue.m */,
 				2B3EC15A1913E27100B49FAC /* ViewController.h */,
 				2B3EC15B1913E27100B49FAC /* ViewController.m */,
 				2B3EC15D1913E27100B49FAC /* Images.xcassets */,
+				2BE0A7F6192BBAEE006FFD40 /* Unused */,
 				2BCE6C3A192666A30079A1B2 /* HikingNexusHeaderDraft.png */,
 				2B3EC14C1913E27100B49FAC /* Supporting Files */,
 				43A99F52191A7C5600573ABF /* DBManager.h */,
@@ -265,6 +264,15 @@
 				2B3EC16D1913E27200B49FAC /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2BE0A7F6192BBAEE006FFD40 /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				2B0CF1EA19268FCE000C2224 /* NewHikeSegue.h */,
+				2B0CF1EB19268FCE000C2224 /* NewHikeSegue.m */,
+			);
+			name = Unused;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

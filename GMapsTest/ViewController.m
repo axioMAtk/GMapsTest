@@ -46,9 +46,11 @@
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.85
                                                             longitude:151.20
                                                                  zoom:15];
-    mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    mapView_ = [GMSMapView mapWithFrame:self.view.bounds camera:camera];
     mapView_.myLocationEnabled = YES;
-    self.view = mapView_;
+    mapView_.mapType = kGMSTypeSatellite;
+    [self.view insertSubview:mapView_ atIndex:0];
+    [mapView_ setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
     
     // Creates a marker in the center of the map.
     /*GMSMarker *marker = [[GMSMarker alloc] init];

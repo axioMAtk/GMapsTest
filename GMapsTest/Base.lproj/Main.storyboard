@@ -74,6 +74,7 @@
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vDy-yH-VgS"/>
@@ -86,7 +87,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="luY-a4-YIL"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="157" y="135"/>
         </scene>
@@ -132,7 +132,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="BD0-el-k0G"/>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="custom" identifier="woot" customClass="NewHikeSegue" id="6Mw-vI-Wg4"/>
+                        <segue destination="vXZ-lx-hvc" kind="push" identifier="woot" customClass="NewHikeSegue" id="6Mw-vI-Wg4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qr5-BH-mfC" userLabel="First Responder" sceneMemberID="firstResponder"/>
