@@ -199,9 +199,11 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row   inComponent:(NSInteger)component
 {
     NSLog(@"Selected Row %ld", (long)row);
-    dbString = [NSMutableString stringWithFormat:@"logs%ld", (long)row];
-    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    appDelegate.dbString = dbString;
+    dbString = [NSMutableString stringWithFormat:@"%ld", (long)row];
+    //AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    //appDelegate.dbString = dbString;
+   // NSLog(@"&(row): %d", &(row));
+    //NSLog(@"appDelegate.dbString: %ld", appDelegate.dbString);
     
 }
 
@@ -211,14 +213,16 @@
 //#pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-/*- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"mapSegue"]) {
        // NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        PastMapViewController *destViewController = segue.destinationViewController;
-        destViewController.dbString = dbString;
+        //PastMapViewController *destViewController = segue.destinationViewController;
+        //destViewController.dbString = dbString;
+        AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+        appDelegate.dbString = dbString;
     }
-}*/
+}
 
 
 @end

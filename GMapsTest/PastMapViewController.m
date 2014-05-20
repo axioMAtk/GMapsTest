@@ -40,8 +40,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    NSString *dbString = appDelegate.dbString;
-    NSString *dbQuery = [NSString stringWithFormat:@"SELECT * FROM %@", dbString];
+    //NSString *dbString = appDelegate.dbString;
+    NSString *dbQuery = [NSString stringWithFormat:@"SELECT * FROM logs WHERE hikeNumber = %@", appDelegate.dbString];
     
     
     NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
