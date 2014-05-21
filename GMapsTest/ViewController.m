@@ -33,10 +33,11 @@
 @synthesize JSONString;
 @synthesize countString;
 @synthesize hikeNumber;
+@synthesize totalDistance;
+@synthesize lastLocation;
 
 - (void)viewDidLoad {
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
-    [self loadSoups];
     // Create a GMSCameraPosition that tells the map to display the
     // coordinate -33.85,151.20 at zoom level 15.
     locationManager = [[CLLocationManager alloc] init];
@@ -108,52 +109,18 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void) loadSoups
-{
-    elevationStuff = [[NSMutableArray alloc] init];
-    
-    NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/elevation/json?locations=39.7391536,-104.9847034&sensor=false&key=AIzaSyAlDakcBveHB6pyPqqkU-6RbHO2pGFiT2g"]];
-    
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url
-                                                cachePolicy:NSURLRequestReloadIgnoringCacheData
-                                            timeoutInterval:30];
-    
-    NSData *urlData;
-    NSURLResponse *response;
-    NSError *error;
-    
-    urlData = [NSURLConnection sendSynchronousRequest:urlRequest
-                                    returningResponse:&response
-                                                error:&error];
-    // NSLog(@"%@", urlData);
-    
-    NSDictionary *jsonDic = [NSJSONSerialization
-                             JSONObjectWithData:urlData
-                             options:0
-                             error:&error];
-    
-    // NSLog(@"%@", jsonDic);
-    NSDictionary *elevationDic = [jsonDic objectForKey:@"results"];
-    
-    //NSLog(@"Sides length is: %x", (unsigned int)[flikLiveDic count]);
-    //NSLog(@"Description: %@", [flikLiveDic description]);
-    
-    for(NSDictionary *subMeals in elevationDic){
-        NSString *holdString = [NSString stringWithFormat:@"%@", [subMeals objectForKey:@"elevation"]];
-        //NSLog(@"MealName: %@", holdString);
-        [elevationStuff addObject:holdString];
-    }
-    NSLog(@"lunchSoups: %@", elevationStuff);
-    theStringiestStringThatHasEverStringed = elevationStuff.description;
-    
-}
+
 
 #pragma mark -
 #pragma mark CLLocationManagerDelegate
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
+    
     CLLocation *location = [locations lastObject];
+    CLLocationDistance distance = [location distanceFromLocation:lastLocation];
+    totalDistance += distance;
+    NSLog(@"Total Distance: %.2f", totalDistance);
     NSString *currentLatitude = [[NSString alloc]
                                  initWithFormat:@"%+.6f",
                                  location.coordinate.latitude];
@@ -242,44 +209,12 @@
     [theDictionary setObject:dateString forKey:@"time"];
     [log addObject:theDictionary];
     
-    NSError *error;
-    NSData * JSONData = [NSJSONSerialization dataWithJSONObject:log
-                                                        options:0
-                                                        error:&error];
-    
-    JSONString = [[NSString alloc] initWithData:JSONData encoding:NSUTF8StringEncoding];
-    
-    //[JSONlog addObject:JSONData];
-    
-    
-    //for(int indexvalue=0; indexvalue<log.count; indexvalue++)
-    //{
-        //NSLog(@"dictionary values: %@", theDictionary);
-        //NSLog(@"log Array values: %@", log.lastObject);
-        //NSLog(@"Json values: %@", JSONlog.lastObject);
-        //NSLog(JSONString);
-    //}
-    NSURL *url = [NSURL URLWithString:@"http://www.hikingnex.us/phpshizz/sendLog.php"];
-    
-    NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
-                                                              cachePolicy:NSURLRequestReloadIgnoringCacheData
-                                                          timeoutInterval:60];
-    
-    [theRequest setHTTPMethod:@"POST"];
-    [theRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    
-    NSString *postData = JSONString;
-    
-    NSString *length = [NSString stringWithFormat:@"%d", [postData length]];
-    [theRequest setValue:length forHTTPHeaderField:@"Content-Length"];
-    
-    [theRequest setHTTPBody:[postData dataUsingEncoding:NSASCIIStringEncoding]];
-    
-   // NSURLConnection *sConnection = [NSURLConnection connectionWithRequest:theRequest delegate:self];
-    //[sConnection start];
-    //NSlog(@"stuf%@", theRequest.accessibilityValue);
+    lastLocation = location;
     
 }
+
+
+
 
 - (void)willMoveToParentViewController:(UIViewController *)parent
 {

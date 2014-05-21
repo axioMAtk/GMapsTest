@@ -25,6 +25,8 @@
 @property (strong, nonatomic) NSString* JSONString;
 @property (strong, nonatomic) NSString* countString;
 @property (nonatomic) NSUInteger hikeNumber;
+@property (nonatomic) CLLocationDistance totalDistance;
+@property (strong, nonatomic) CLLocation* lastLocation;
 
 
 
