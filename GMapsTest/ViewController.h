@@ -13,6 +13,9 @@
 
 
 @interface ViewController : UIViewController <CLLocationManagerDelegate>
+{
+    IBOutlet UISegmentedControl *Segment;
+}
 @property (strong, nonatomic)NSMutableArray *elevationStuff;
 @property (strong, nonatomic)NSString* theStringiestStringThatHasEverStringed;
 @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -25,7 +28,6 @@
 @property (strong, nonatomic) NSString* JSONString;
 @property (strong, nonatomic) NSString* countString;
 @property (nonatomic) NSUInteger hikeNumber;
-
-
+-(IBAction)switchMapType;
 
 @end
