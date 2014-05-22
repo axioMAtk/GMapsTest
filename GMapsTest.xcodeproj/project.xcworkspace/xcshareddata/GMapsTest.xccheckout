@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>050D0DB4-61E8-43A5-8F50-0D8F404E1F8A</string>
+	<string>7416D1D7-74D6-4384-B7D2-620BD4B67F1D</string>
 	<key>IDESourceControlProjectName</key>
 	<string>GMapsTest</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>674557E7-D169-4CF7-A9B6-AF3EBA7AC8AD</key>
+		<key>0A1F5874-8F6C-4F69-9825-FEF3FED28B2C</key>
 		<string>https://github.com/axioMAtk/GMapsTest.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>GMapsTest.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>674557E7-D169-4CF7-A9B6-AF3EBA7AC8AD</key>
+		<key>0A1F5874-8F6C-4F69-9825-FEF3FED28B2C</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>674557E7-D169-4CF7-A9B6-AF3EBA7AC8AD</string>
+	<string>0A1F5874-8F6C-4F69-9825-FEF3FED28B2C</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>674557E7-D169-4CF7-A9B6-AF3EBA7AC8AD</string>
+			<string>0A1F5874-8F6C-4F69-9825-FEF3FED28B2C</string>
 			<key>IDESourceControlWCCName</key>
 			<string>GMapsTest</string>
 		</dict>
