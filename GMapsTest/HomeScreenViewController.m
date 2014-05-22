@@ -10,6 +10,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "CoreLocation/CoreLocation.h"
 
+
 @interface HomeScreenViewController () <GMSMapViewDelegate>
 
 @end
@@ -26,8 +27,11 @@ BOOL start;
 
 - (void)viewDidLoad
 {
-    NSLog(@"width: %fl", CGRectGetWidth(self.view.bounds));
-    NSLog(@"height: %fl", CGRectGetHeight(self.view.bounds));
+    if([UICKeyChainStore stringForKey:@"test"]!=nil)
+    {
+        NSLog(@"test: %@", [UICKeyChainStore stringForKey:@"test"]);
+    }
+    //NSLog(@"height: %fl", CGRectGetHeight(self.view.bounds));
     locationManager = [[CLLocationManager alloc] init];
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.delegate = self;
