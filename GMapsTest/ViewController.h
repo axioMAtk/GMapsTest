@@ -30,9 +30,10 @@
 @property (strong, nonatomic) NSString* JSONString;
 @property (strong, nonatomic) NSString* countString;
 @property (nonatomic) NSUInteger hikeNumber;
--(IBAction)switchMapType;
 @property (nonatomic) CLLocationDistance totalDistance;
 @property (strong, nonatomic) CLLocation* lastLocation;
+-(IBAction)switchMapType;
+
 @property (nonatomic) NSInteger minHeight;
 @property (nonatomic) NSInteger maxHeight;
 
