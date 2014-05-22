@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <GoogleMaps/GoogleMaps.h>
+#import "Toast+UIView.h"
+
 @import Security;
 
 
@@ -31,5 +33,12 @@
 @property (nonatomic) CLLocationDistance totalDistance;
 @property (strong, nonatomic) CLLocation* lastLocation;
 -(IBAction)switchMapType;
+@property (nonatomic) CLLocationDistance totalDistance;
+@property (strong, nonatomic) CLLocation* lastLocation;
+@property (nonatomic) NSInteger minHeight;
+@property (nonatomic) NSInteger maxHeight;
+
+
+
 
 @end

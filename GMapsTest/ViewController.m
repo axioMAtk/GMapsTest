@@ -35,6 +35,8 @@
 @synthesize hikeNumber;
 @synthesize totalDistance;
 @synthesize lastLocation;
+@synthesize maxHeight;
+@synthesize minHeight;
 
 - (void)viewDidLoad {
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
@@ -47,7 +49,9 @@
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.85
                                                             longitude:151.20
                                                                  zoom:15];
-    mapView_ = [GMSMapView mapWithFrame:self.view.bounds camera:camera];
+    mapView_ = [GMSMapView mapWithFrame:CGRectMake(0, 64,
+                                                   CGRectGetWidth(self.view.bounds),
+                                                   (CGRectGetHeight(self.view.bounds))-64) camera:camera];
     mapView_.myLocationEnabled = YES;
     mapView_.mapType = kGMSTypeSatellite;
     [self.view insertSubview:mapView_ atIndex:0];
@@ -100,6 +104,9 @@
     //NSString *queryString = [NSString stringWithFormat:@"CREATE TABLE logs%@ (latitude Double, longitude Double, elevation Double, horizontalAccuracy Double, verticalAccuracy Double, time datetime)", countString];
     //[database executeUpdate:queryString];
     [database close];
+    
+    maxHeight=-9999999;
+    minHeight=99999999;
 
     
 }
@@ -210,6 +217,17 @@
     [log addObject:theDictionary];
     
     lastLocation = location;
+    if(location.altitude<minHeight)
+    {
+        minHeight=location.altitude;
+        NSLog(@"minimum height: %ldl", (long)minHeight);
+    }
+    
+    if(location.altitude>maxHeight)
+    {
+        maxHeight=location.altitude;
+        NSLog(@"maximum height: %ldl", (long)maxHeight);
+    }
     
 }
 
@@ -255,6 +273,17 @@
     
     NSURLConnection *sConnection = [NSURLConnection connectionWithRequest:theRequest delegate:self];
     [sConnection start];
+}
+- (IBAction)showStats:(id)sender {
+    
+    NSString *toastString = [NSString stringWithFormat:@"Total Distance: %.2f %@ \n %@ %.2ld \n %@ %.2ld", totalDistance, @" m", @"Max Height", (long)maxHeight, @"Min Height", (long)minHeight];
+    [self.view makeToast:toastString
+                duration:100
+                position:[NSValue valueWithCGPoint:CGPointMake(160, 400)]];
+    
+    
+
+    
 }
 
 @end
