@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <GoogleMaps/GoogleMaps.h>
+#import "Toast+UIView.h"
+
 @import Security;
 
 
@@ -28,6 +30,7 @@
 @property (strong, nonatomic) NSString* JSONString;
 @property (strong, nonatomic) NSString* countString;
 @property (nonatomic) NSUInteger hikeNumber;
+-(IBAction)switchMapType;
 @property (nonatomic) CLLocationDistance totalDistance;
 @property (strong, nonatomic) CLLocation* lastLocation;
 @property (nonatomic) NSInteger minHeight;

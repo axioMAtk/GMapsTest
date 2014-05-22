@@ -274,5 +274,16 @@
     NSURLConnection *sConnection = [NSURLConnection connectionWithRequest:theRequest delegate:self];
     [sConnection start];
 }
+- (IBAction)showStats:(id)sender {
+    
+    NSString *toastString = [NSString stringWithFormat:@"Total Distance: %.2f %@ \n %@ %.2ld \n %@ %.2ld", totalDistance, @" m", @"Max Height", (long)maxHeight, @"Min Height", (long)minHeight];
+    [self.view makeToast:toastString
+                duration:100
+                position:[NSValue valueWithCGPoint:CGPointMake(160, 400)]];
+    
+    
+
+    
+}
 
 @end

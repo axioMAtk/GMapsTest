@@ -5,6 +5,8 @@ target "GMapsTest" do
 pod 'UICKeyChainStore'
 pod 'FMDB'
 pod 'PSLocationManager', :git => 'https://github.com/perspecdev/PSLocationManager.git'
+pod 'Toast'			
+
 
 end
 
