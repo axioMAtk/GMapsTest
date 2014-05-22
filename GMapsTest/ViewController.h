@@ -27,6 +27,9 @@
 @property (nonatomic) NSUInteger hikeNumber;
 @property (nonatomic) CLLocationDistance totalDistance;
 @property (strong, nonatomic) CLLocation* lastLocation;
+@property (nonatomic) NSInteger minHeight;
+@property (nonatomic) NSInteger maxHeight;
+
 
 
 

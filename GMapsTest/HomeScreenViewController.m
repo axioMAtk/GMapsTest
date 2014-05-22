@@ -26,6 +26,8 @@ BOOL start;
 
 - (void)viewDidLoad
 {
+    NSLog(@"width: %fl", CGRectGetWidth(self.view.bounds));
+    NSLog(@"height: %fl", CGRectGetHeight(self.view.bounds));
     locationManager = [[CLLocationManager alloc] init];
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.delegate = self;

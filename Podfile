@@ -4,6 +4,7 @@ platform :ios, "7.0"
 target "GMapsTest" do
 pod 'UICKeyChainStore'
 pod 'FMDB'
+pod 'PSLocationManager', :git => 'https://github.com/perspecdev/PSLocationManager.git'
 
 end
 
