@@ -13,6 +13,9 @@
 
 
 @interface ViewController : UIViewController <CLLocationManagerDelegate>
+{
+    IBOutlet UISegmentedControl *Segment;
+}
 @property (strong, nonatomic)NSMutableArray *elevationStuff;
 @property (strong, nonatomic)NSString* theStringiestStringThatHasEverStringed;
 @property (strong, nonatomic) CLLocationManager *locationManager;

@@ -241,6 +241,18 @@
     }
 }
 
+-(IBAction)switchMapType{
+	if(Segment.selectedSegmentIndex == 0){
+		mapView_.mapType = kGMSTypeSatellite;
+	}
+	if(Segment.selectedSegmentIndex == 1){
+        mapView_.mapType = kGMSTypeTerrain;
+	}
+    if(Segment.selectedSegmentIndex == 2){
+        mapView_.mapType = kGMSTypeHybrid;
+	}
+}
+
 -(void) sendStuff
 {
     NSURL *url = [NSURL URLWithString:@"http://www.hikingnex.us/phpshizz/sendLog.php"];
