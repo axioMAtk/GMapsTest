@@ -12,6 +12,8 @@
 #import "sqlite3.h"
 #import "FMDatabase.h"
 #import "FMDatabaseAdditions.h"
+#import "UICKeyChainStore.h"
+@import Security;
 
 
 @interface HomeScreenViewController : UIViewController <CLLocationManagerDelegate> {

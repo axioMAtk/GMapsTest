@@ -43,6 +43,7 @@
 		436084AF1921404F007926C3 /* HomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 436084AE1921404F007926C3 /* HomeScreenViewController.m */; };
 		43A99F51191A7C1A00573ABF /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A99F50191A7C1A00573ABF /* libsqlite3.dylib */; };
 		43A99F5E191AA15E00573ABF /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A99F5D191AA15E00573ABF /* GoogleMaps.framework */; };
+		43A9F9D8192E8C9E001012CB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A9F9D7192E8C9E001012CB /* LoginViewController.m */; };
 		43B097051923D1BA002D7E06 /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B097041923D1BA002D7E06 /* DataViewController.m */; };
 		43B097081923E11F002D7E06 /* PastMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B097071923E11F002D7E06 /* PastMapViewController.m */; };
 		5F1E47A81CB1454DB783F438 /* libPods-GMapsTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D35F18E045104096809D9430 /* libPods-GMapsTest.a */; };
@@ -102,6 +103,8 @@
 		436084AE1921404F007926C3 /* HomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScreenViewController.m; sourceTree = "<group>"; };
 		43A99F50191A7C1A00573ABF /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		43A99F5D191AA15E00573ABF /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
+		43A9F9D6192E8C9E001012CB /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		43A9F9D7192E8C9E001012CB /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		43B097031923D1BA002D7E06 /* DataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataViewController.h; sourceTree = "<group>"; };
 		43B097041923D1BA002D7E06 /* DataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataViewController.m; sourceTree = "<group>"; };
 		43B097061923E11F002D7E06 /* PastMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PastMapViewController.h; sourceTree = "<group>"; };
@@ -211,6 +214,8 @@
 				43B097071923E11F002D7E06 /* PastMapViewController.m */,
 				43B097031923D1BA002D7E06 /* DataViewController.h */,
 				43B097041923D1BA002D7E06 /* DataViewController.m */,
+				43A9F9D6192E8C9E001012CB /* LoginViewController.h */,
+				43A9F9D7192E8C9E001012CB /* LoginViewController.m */,
 				436084AD1921404F007926C3 /* HomeScreenViewController.h */,
 				436084AE1921404F007926C3 /* HomeScreenViewController.m */,
 				2B3EC15A1913E27100B49FAC /* ViewController.h */,
@@ -401,6 +406,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43A9F9D8192E8C9E001012CB /* LoginViewController.m in Sources */,
 				2B3EC15C1913E27100B49FAC /* ViewController.m in Sources */,
 				2B3EC1561913E27100B49FAC /* AppDelegate.m in Sources */,
 				2B3EC1521913E27100B49FAC /* main.m in Sources */,
