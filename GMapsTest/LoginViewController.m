@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "Toast+UIView.h"
 
 @interface LoginViewController ()
 
@@ -31,16 +32,27 @@
 
 - (void)viewDidLoad
 {
+    
+    [super viewDidLoad];
+    //[UICKeyChainStore setString:@"nlundie" forKey:@"username"];
+    //[UICKeyChainStore setString:@"test" forKey:@"password"];
+    //[UICKeyChainStore removeItemForKey:@"password"];
+    //[UICKeyChainStore removeItemForKey:@"username"];
+    // Do any additional setup after loading the view.
     if(!([UICKeyChainStore stringForKey:@"username"]==nil) && !([UICKeyChainStore stringForKey:@"password"]==nil))
     {
         username=[UICKeyChainStore stringForKey:@"username"];
         password=[UICKeyChainStore stringForKey:@"password"];
         [self attemtLogin];
+        if(success==1)
+        {
+            //[UICKeyChainStore setString:username forKey:@"username"];
+            //[UICKeyChainStore setString:password forKey:@"password"];
+            [self performSegueWithIdentifier: @"loggedIn" sender: self];
+        }
         [UICKeyChainStore removeItemForKey:@"password"];
         
     }
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
     if([UICKeyChainStore stringForKey:@"username"]!=nil)
     {
         usernameField.text=[UICKeyChainStore stringForKey:@"username"];
@@ -57,7 +69,7 @@
     //NSInteger success = 0;
     success=0;
     //jsonArray = [[NSMutableArray alloc] init];
-    NSString *urlString = [NSString stringWithFormat:@"http://www.hikingnex.us/phpshizz/login.php?id=%@&p=%@", [UICKeyChainStore stringForKey:@"username"] , [UICKeyChainStore stringForKey:@"password"]];
+    NSString *urlString = [NSString stringWithFormat:@"http://www.hikingnex.us/phpshizz/Login.php?id=%@&p=%@", username, password];
     
     
     
@@ -84,14 +96,9 @@
     
     NSLog(@"%@", jsonDic);
     success = [jsonDic[@"success"] integerValue];
-    message = [jsonDic[@"message"] stringValue];
+    //message = [jsonDic[@"message"] stringValue];
     
-    if(success==0)
-    {
-        [UICKeyChainStore setString:username forKey:@"username"];
-        [UICKeyChainStore setString:password forKey:@"password"];
-        [self performSegueWithIdentifier: @"loggedIn" sender: self];
-    }
+    
     
     
     
@@ -100,14 +107,40 @@
 {
     username = usernameField.text;
     password = passwordField.text;
+    NSLog(@"success: %i", success);
+    NSLog(@"message: %i", message);
+    
     
     [self attemtLogin];
+    
+    if(success==1)
+    {
+        [UICKeyChainStore setString:username forKey:@"username"];
+        [UICKeyChainStore setString:password forKey:@"password"];
+        [self performSegueWithIdentifier: @"newLogIn" sender: self];
+    }
+    
+    if(success==0)
+    {
+        usernameField.text=nil;
+        passwordField.text=nil;
+        [self.view makeToast:@"Invalid username, you might wanna go register"
+                    duration:5
+                    position:[NSValue valueWithCGPoint:CGPointMake(160, 400)]];
+    }
+    if(success==2)
+    {
+        passwordField.text=nil;
+       [self.view makeToast:@"Invalid Password!"
+                    duration:5
+                    position:[NSValue valueWithCGPoint:CGPointMake(160, 400)]];
+    }
     
 }
 
 - (IBAction)registerButton:(id)sender
 {
-    
+    [self performSegueWithIdentifier: @"RegistrationSegue" sender: self];
     
 }
 

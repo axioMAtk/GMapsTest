@@ -83,8 +83,8 @@
     
     [database close];*/
     
-    [UICKeyChainStore setString:@"testUser" forKey:@"username"];
-    [UICKeyChainStore setString:@"peenpeen" forKey:@"password"];
+    //[UICKeyChainStore setString:@"testUser" forKey:@"username"];
+    //[UICKeyChainStore setString:@"peenpeen" forKey:@"password"];
     dbString = [NSMutableString stringWithFormat:@"%d", 0];
     
     
