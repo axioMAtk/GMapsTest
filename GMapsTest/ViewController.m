@@ -397,7 +397,11 @@
 
 - (IBAction)showStats:(id)sender {
     
-    NSString *toastString = [NSString stringWithFormat:@"Total Distance: %.2f %@ \n %@ %.2ld \n %@ %.2ld", totalDistance, @" m", @"Max Height", (long)maxHeight, @"Min Height", (long)minHeight];
+    NSString *display = [NSNumberFormatter localizedStringFromNumber:@(totalDistance)
+                                                         numberStyle:NSNumberFormatterDecimalStyle];
+    NSString *toastString = [NSString stringWithFormat:@"Total Distance: %@ %@ \n %@ %.2ld \n %@ %.2ld", display, @" m", @"Max Height", (long)maxHeight, @"Min Height", (long)minHeight];
+    //int aNum = 2000000;
+    
     [self.view makeToast:toastString
                 duration:100
                 position:[NSValue valueWithCGPoint:CGPointMake(160, 400)]];
