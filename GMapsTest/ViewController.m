@@ -42,10 +42,17 @@
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     // Create a GMSCameraPosition that tells the map to display the
     // coordinate -33.85,151.20 at zoom level 15.
-    locationManager = [[CLLocationManager alloc] init];
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    backgroundQueue = dispatch_queue_create("com.lundie.thread", NULL);
+    backgroundQueue2 = dispatch_queue_create("com.lundie.thread2", NULL);
+    locationManager = [[PSLocationManager alloc] init];
+    //locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.delegate = self;
-    [locationManager startUpdatingLocation];
+    [locationManager prepLocationUpdates];
+    dispatch_sync(backgroundQueue, ^(void) {
+        [locationManager startLocationUpdates];
+    });
+    //[locationManager startUpdatingLocation];
+    //[locationManager startUpdatingLocation];
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.85
                                                             longitude:151.20
                                                                  zoom:15];
@@ -53,6 +60,7 @@
                                                    CGRectGetWidth(self.view.bounds),
                                                    (CGRectGetHeight(self.view.bounds))-64) camera:camera];
     mapView_.myLocationEnabled = YES;
+    //mapView_.settings.myLocationButton = YES;
     mapView_.mapType = kGMSTypeSatellite;
     [self.view insertSubview:mapView_ atIndex:0];
     [mapView_ setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
@@ -65,6 +73,8 @@
     //marker.map = mapView_;
     //GMSMutablePath *path = [GMSMutablePath path];
     path = [[GMSMutablePath alloc] init];
+    /*GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
+    polyline.map = mapView_;*/
     /*[path addCoordinate:CLLocationCoordinate2DMake(-33.85, 151.20)];
     [path addCoordinate:CLLocationCoordinate2DMake(-33.70, 151.40)];
     [path addCoordinate:CLLocationCoordinate2DMake(-33.73, 151.41)];
@@ -75,9 +85,9 @@
         //                                                         zoom:6];
     
     
-    altArray = [[NSMutableArray alloc] init];
-    latArray = [[NSMutableArray alloc] init];
-    longArray = [[NSMutableArray alloc] init];
+   // altArray = [[NSMutableArray alloc] init];
+    //latArray = [[NSMutableArray alloc] init];
+    //longArray = [[NSMutableArray alloc] init];
     log = [[NSMutableArray alloc] init];
     JSONlog = [[NSMutableArray alloc] init];
     //hikeNumber = [[NSUInteger alloc] init];
@@ -121,10 +131,16 @@
 #pragma mark -
 #pragma mark CLLocationManagerDelegate
 
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+-(void)locationManager:(PSLocationManager *)manager waypoint:(CLLocation *)waypoint calculatedSpeed:(double)calculatedSpeed
 {
     
-    CLLocation *location = [locations lastObject];
+
+    [self foundLocation:waypoint];
+    
+    //[self foundLocation:manager.location];
+    
+    //[self foundLocation:manager.location];
+    /*CLLocation *location = [locations lastObject];
     CLLocationDistance distance = [location distanceFromLocation:lastLocation];
     totalDistance += distance;
     NSLog(@"Total Distance: %.2f", totalDistance);
@@ -164,16 +180,16 @@
     //CLLocationDistance distanceBetween = [newLocation
       //                                    distanceFromLocation:startLocation];
     
-    /*NSString *tripString = [[NSString alloc]
+    NSString *tripString = [[NSString alloc]
                             initWithFormat:@"%f",
-                            distanceBetween];*/
+                            distanceBetween];
     //distance.text = tripString;
     [path addCoordinate:CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)];
-    [latArray addObject:currentLatitude];
+    //[latArray addObject:currentLatitude];
     //NSLog(@"latArray: %@", latArray);
-    [longArray addObject:currentLongitude];
+    //[longArray addObject:currentLongitude];
     //NSLog(@"longArray: %@", longArray);
-    [altArray addObject:currentAltitude];
+    //[altArray addObject:currentAltitude];
     //NSLog(@"altArray: %@", altArray);
     
     
@@ -220,15 +236,140 @@
     if(location.altitude<minHeight)
     {
         minHeight=location.altitude;
-        NSLog(@"minimum height: %ldl", (long)minHeight);
+        //NSLog(@"minimum height: %ldl", (long)minHeight);
     }
     
     if(location.altitude>maxHeight)
     {
         maxHeight=location.altitude;
-        NSLog(@"maximum height: %ldl", (long)maxHeight);
+        //NSLog(@"maximum height: %ldl", (long)maxHeight);
+    }*/
+    //[self.locationManager stopLocationUpdates];
+    //self.timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(_turnOnLocationManager)  userInfo:nil repeats:NO];
+}
+
+- (void)_turnOnLocationManager {
+    [self.locationManager startLocationUpdates];
+}
+
+
+
+
+- (void)foundLocation:(CLLocation *)location
+{
+    //CLLocation *location = [locations lastObject];
+    //CLLocationDistance distance = [location distanceFromLocation:lastLocation];
+    totalDistance = locationManager.totalDistance;
+    NSLog(@"Total Distance: %.2f", totalDistance);
+   NSString *currentLatitude = [[NSString alloc]
+                                 initWithFormat:@"%+.6f",
+                                 location.coordinate.latitude];
+    //latitude.text = currentLatitude;
+    
+    NSString *currentLongitude = [[NSString alloc]
+                                  initWithFormat:@"%+.6f",
+                                  location.coordinate.longitude];
+    //longitude.text = currentLongitude;
+    
+    NSString *currentHorizontalAccuracy =
+    [[NSString alloc]
+     initWithFormat:@"%+.6f",
+     location.horizontalAccuracy];
+    //horizontalAccuracy.text = currentHorizontalAccuracy;
+    
+    NSString *currentAltitude = [[NSString alloc]
+                                 initWithFormat:@"%+.6f",
+                                 location.altitude];
+    //altitude.text = currentAltitude;
+    //altArray = [[NSMutableArray alloc] init];
+    //[altArray addObject:currentAltitude];
+    //NSLog(@"altArray: %@", altArray);
+    
+    NSString *currentVerticalAccuracy =
+    [[NSString alloc]
+     initWithFormat:@"%+.6f",
+     location.verticalAccuracy];
+    //verticalAccuracy.text = currentVerticalAccuracy;
+    
+    //if (startLocation == nil)
+    //  startLocation = newLocation;
+    
+    //CLLocationDistance distanceBetween = [newLocation
+    //                                    distanceFromLocation:startLocation];
+    
+    /*NSString *tripString = [[NSString alloc]
+     initWithFormat:@"%f",
+     distanceBetween];*/
+    //distance.text = tripString;
+    [path addCoordinate:CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)];
+    //[latArray addObject:currentLatitude];
+    //NSLog(@"latArray: %@", latArray);
+    //[longArray addObject:currentLongitude];
+    //NSLog(@"longArray: %@", longArray);
+    //[altArray addObject:currentAltitude];
+    //NSLog(@"altArray: %@", altArray);
+    
+    
+    
+    
+    GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
+    polyline.map = mapView_;
+    
+    //Creates CoordinateBounds that show the entire path and sets camera to display those bounds
+    GMSCoordinateBounds *pathscreen = [[GMSCoordinateBounds alloc] initWithPath:path];
+    GMSCameraUpdate *pathcam = [GMSCameraUpdate fitBounds:pathscreen];
+    [mapView_ animateWithCameraUpdate:pathcam];
+    
+    NSDateFormatter *gmtDateFormatter = [[NSDateFormatter alloc] init];
+    gmtDateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    gmtDateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    
+    NSDate *now = [NSDate date];
+    
+    NSString *dateString = [gmtDateFormatter stringFromDate:now];
+    
+    
+    
+    /*NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDir = [docPaths objectAtIndex:0];
+    NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"base.sqlite"];
+    FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
+    
+    [database open];
+    NSString *nqueryString = [NSString stringWithFormat:@"INSERT INTO logs (latitude, longitude, elevation, horizontalAccuracy, verticalAccuracy, time, hikeNumber) VALUES (?, ?, ?, ?, ?, ?, ?)"];
+    [database executeUpdate:@"INSERT INTO logs (latitude, longitude, elevation, horizontalAccuracy, verticalAccuracy, time, hikeNumber) VALUES (?, ?, ?, ?, ?, ?, ?)", currentLatitude, currentLongitude, currentAltitude, currentHorizontalAccuracy, currentVerticalAccuracy, dateString, countString, nil];
+    [database close];*/
+    
+    /*NSMutableDictionary *theDictionary = [[NSMutableDictionary alloc] init];
+     [theDictionary setObject:currentLatitude forKey:@"latitude"];
+     [theDictionary setObject:currentLongitude forKey:@"longitude"];
+     [theDictionary setObject:currentAltitude forKey:@"elevation"];
+     [theDictionary setObject:currentHorizontalAccuracy forKey:@"horizontalAccuracy"];
+     [theDictionary setObject:currentVerticalAccuracy forKey:@"verticalAccuracy"];
+     [theDictionary setObject:dateString forKey:@"time"];
+     [log addObject:theDictionary];*/
+    
+    NSMutableDictionary *theDictionary = [[NSMutableDictionary alloc] init];
+    [theDictionary setObject:currentLatitude forKey:@"latitude"];
+    [theDictionary setObject:currentLongitude forKey:@"longitude"];
+    [theDictionary setObject:currentAltitude forKey:@"elevation"];
+    [theDictionary setObject:currentHorizontalAccuracy forKey:@"horizontalAccuracy"];
+    [theDictionary setObject:currentVerticalAccuracy forKey:@"verticalAccuracy"];
+    [theDictionary setObject:dateString forKey:@"time"];
+    [log addObject:theDictionary];
+    
+    lastLocation = location;
+    if(location.altitude<minHeight)
+    {
+        minHeight=location.altitude;
+        //NSLog(@"minimum height: %ldl", (long)minHeight);
     }
     
+    if((double)location.altitude>maxHeight)
+    {
+        maxHeight=location.altitude;
+        //NSLog(@"maximum height: %ldl", (long)maxHeight);
+    }
 }
 
 
@@ -253,36 +394,44 @@
 	}
 }
 
--(void) sendStuff
-{
-    NSURL *url = [NSURL URLWithString:@"http://www.hikingnex.us/phpshizz/sendLog.php"];
-    
-    NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
-                                                              cachePolicy:NSURLRequestReloadIgnoringCacheData
-                                                          timeoutInterval:60];
-    
-    [theRequest setHTTPMethod:@"POST"];
-    [theRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    
-    NSString *postData = JSONString;
-    
-    NSString *length = [NSString stringWithFormat:@"%d", [postData length]];
-    [theRequest setValue:length forHTTPHeaderField:@"Content-Length"];
-    
-    [theRequest setHTTPBody:[postData dataUsingEncoding:NSASCIIStringEncoding]];
-    
-    NSURLConnection *sConnection = [NSURLConnection connectionWithRequest:theRequest delegate:self];
-    [sConnection start];
-}
+
 - (IBAction)showStats:(id)sender {
     
-    NSString *toastString = [NSString stringWithFormat:@"Total Distance: %.2f %@ \n %@ %.2ld \n %@ %.2ld", totalDistance, @" m", @"Max Height", (long)maxHeight, @"Min Height", (long)minHeight];
+    NSString *display = [NSNumberFormatter localizedStringFromNumber:@(totalDistance)
+                                                         numberStyle:NSNumberFormatterDecimalStyle];
+    NSString *toastString = [NSString stringWithFormat:@"Total Distance: %@ %@ \n %@ %.2ld \n %@ %.2ld", display, @" m", @"Max Height", (long)maxHeight, @"Min Height", (long)minHeight];
+    //int aNum = 2000000;
+    
     [self.view makeToast:toastString
                 duration:100
                 position:[NSValue valueWithCGPoint:CGPointMake(160, 400)]];
     
     
+}
+- (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {
+    // location services is probably not enabled for the app
+    //self.strengthLabel.text = NSLocalizedString(@"Unable to determine location", @"");
+    [self.view makeToast:@"Unable to determine location"
+                duration:100
+                position:[NSValue valueWithCGPoint:CGPointMake(160, 400)]];
+}
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [locationManager stopLocationUpdates];
+    NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDir = [docPaths objectAtIndex:0];
+    NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"base.sqlite"];
+    FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
+    
+    [database open];
+    for(int x=0; x<log.count; x++)
+    {
+        NSDictionary *theDictionary = [log objectAtIndex:x];
+        [database executeUpdate:@"INSERT INTO logs (latitude, longitude, elevation, horizontalAccuracy, verticalAccuracy, time, hikeNumber) VALUES (?, ?, ?, ?, ?, ?, ?)", [theDictionary objectForKey:@"latitude"], [theDictionary objectForKey:@"longitude"], [theDictionary objectForKey:@"elevation"], [theDictionary objectForKey:@"horizontalAccuracy"], [theDictionary objectForKey:@"verticalAccuracy"], [theDictionary objectForKey:@"time"], countString, nil];
+    }
+    
+    [database close];
+    NSLog(@"dumped array to database");
     
 }
 

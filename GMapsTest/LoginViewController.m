@@ -50,8 +50,9 @@
             //[UICKeyChainStore setString:password forKey:@"password"];
             [self performSegueWithIdentifier: @"loggedIn" sender: self];
         }
+        else{
         [UICKeyChainStore removeItemForKey:@"password"];
-        
+        }
     }
     if([UICKeyChainStore stringForKey:@"username"]!=nil)
     {
@@ -108,7 +109,7 @@
     username = usernameField.text;
     password = passwordField.text;
     NSLog(@"success: %i", success);
-    NSLog(@"message: %i", message);
+   // NSLog(@"message: %i", message);
     
     
     [self attemptLogin];
@@ -126,14 +127,14 @@
         passwordField.text=nil;
         [self.view makeToast:@"Invalid username, you might wanna go register"
                     duration:5
-                    position:[NSValue valueWithCGPoint:CGPointMake(160, 400)]];
+                    position:[NSValue valueWithCGPoint:CGPointMake(160, 200)]];
     }
     if(success==2)
     {
         passwordField.text=nil;
        [self.view makeToast:@"Invalid Password!"
                     duration:5
-                    position:[NSValue valueWithCGPoint:CGPointMake(160, 400)]];
+                    position:[NSValue valueWithCGPoint:CGPointMake(160, 200)]];
     }
     
 }
