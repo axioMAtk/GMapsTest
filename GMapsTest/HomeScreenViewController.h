@@ -18,6 +18,7 @@
 
 @interface HomeScreenViewController : UIViewController <CLLocationManagerDelegate> {
     CLLocationManager *hsLocationManager;
+    IBOutlet UIButton *mylocbtn;
 }
 
 @property (strong,nonatomic) GMSCameraPosition *currentcam;
@@ -34,5 +35,6 @@
 @property (strong, nonatomic) NSMutableArray* JSONlog;
 @property (strong, nonatomic) NSString* JSONString;
 @property (strong, nonatomic) NSString* countString;
+-(IBAction)myloc;
 
 @end
