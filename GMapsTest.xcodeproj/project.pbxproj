@@ -45,6 +45,7 @@
 		43A9F9D8192E8C9E001012CB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A9F9D7192E8C9E001012CB /* LoginViewController.m */; };
 		43B097051923D1BA002D7E06 /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B097041923D1BA002D7E06 /* DataViewController.m */; };
 		43B097081923E11F002D7E06 /* PastMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B097071923E11F002D7E06 /* PastMapViewController.m */; };
+		43CE16851935233500B14478 /* RegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CE16841935233500B14478 /* RegistrationViewController.m */; };
 		5F1E47A81CB1454DB783F438 /* libPods-GMapsTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D35F18E045104096809D9430 /* libPods-GMapsTest.a */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +109,8 @@
 		43B097041923D1BA002D7E06 /* DataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataViewController.m; sourceTree = "<group>"; };
 		43B097061923E11F002D7E06 /* PastMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PastMapViewController.h; sourceTree = "<group>"; };
 		43B097071923E11F002D7E06 /* PastMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PastMapViewController.m; sourceTree = "<group>"; };
+		43CE16831935233500B14478 /* RegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationViewController.h; sourceTree = "<group>"; };
+		43CE16841935233500B14478 /* RegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationViewController.m; sourceTree = "<group>"; };
 		D35F18E045104096809D9430 /* libPods-GMapsTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GMapsTest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9962C72F98C445CB5BFBC0E /* Pods-GMapsTest.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMapsTest.xcconfig"; path = "Pods/Pods-GMapsTest.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -208,6 +211,8 @@
 				2B3EC1541913E27100B49FAC /* AppDelegate.h */,
 				2B3EC1551913E27100B49FAC /* AppDelegate.m */,
 				2B3EC1571913E27100B49FAC /* Main.storyboard */,
+				43CE16831935233500B14478 /* RegistrationViewController.h */,
+				43CE16841935233500B14478 /* RegistrationViewController.m */,
 				43B097061923E11F002D7E06 /* PastMapViewController.h */,
 				43B097071923E11F002D7E06 /* PastMapViewController.m */,
 				43B097031923D1BA002D7E06 /* DataViewController.h */,
@@ -411,6 +416,7 @@
 				43B097051923D1BA002D7E06 /* DataViewController.m in Sources */,
 				436084AF1921404F007926C3 /* HomeScreenViewController.m in Sources */,
 				2B0CF1EC19268FCE000C2224 /* NewHikeSegue.m in Sources */,
+				43CE16851935233500B14478 /* RegistrationViewController.m in Sources */,
 				43B097081923E11F002D7E06 /* PastMapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

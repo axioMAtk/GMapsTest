@@ -17,7 +17,7 @@
 {
     // Override point for customization after application launch.
     [GMSServices provideAPIKey:@"AIzaSyAlDakcBveHB6pyPqqkU-6RbHO2pGFiT2g"];
-    //[UICKeyChainStore removeItemForKey:@"password"];
+    [UICKeyChainStore removeItemForKey:@"password"];
     //[UICKeyChainStore removeItemForKey:@"username"];
     //[UICKeyChainStore setString:@"nlundie" forKey:@"username"];
     

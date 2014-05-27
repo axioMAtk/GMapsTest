@@ -43,7 +43,7 @@
     {
         username=[UICKeyChainStore stringForKey:@"username"];
         password=[UICKeyChainStore stringForKey:@"password"];
-        [self attemptLogin];
+        [self attemptLogin:username withPass:password];
         if(success==1)
         {
             //[UICKeyChainStore setString:username forKey:@"username"];
@@ -65,12 +65,12 @@
     
 }
 
-- (void) attemptLogin
+- (void) attemptLogin:(NSString *)usernamet withPass:(NSString *)passwordt
 {
     //NSInteger success = 0;
     success=0;
     //jsonArray = [[NSMutableArray alloc] init];
-    NSString *urlString = [NSString stringWithFormat:@"http://www.hikingnex.us/phpshizz/Login.php?id=%@&p=%@", username, password];
+    NSString *urlString = [NSString stringWithFormat:@"http://www.hikingnex.us/phpshizz/Login.php?id=%@&p=%@", usernamet, passwordt];
     
     
     
@@ -108,11 +108,12 @@
 {
     username = usernameField.text;
     password = passwordField.text;
+    [self.view endEditing:YES];
     NSLog(@"success: %i", success);
    // NSLog(@"message: %i", message);
     
     
-    [self attemptLogin];
+    [self attemptLogin:username withPass:password];
     
     if(success==1)
     {

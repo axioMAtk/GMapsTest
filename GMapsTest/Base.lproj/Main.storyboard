@@ -131,28 +131,70 @@
             </objects>
             <point key="canvasLocation" x="-725" y="862"/>
         </scene>
-        <!--View Controller-->
+        <!--Registration View Controller-->
         <scene sceneID="m7P-HO-kSO">
             <objects>
-                <viewController id="0Wo-Rb-7sa" sceneMemberID="viewController">
+                <viewController id="0Wo-Rb-7sa" customClass="RegistrationViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hRz-1T-plI"/>
                         <viewControllerLayoutGuide type="bottom" id="S1m-XD-faR"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Y2x-eE-xA7">
+                    <view key="view" contentMode="scaleToFill" id="Y2x-eE-xA7" customClass="re">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Future home of registration" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBl-gL-sOq">
-                                <rect key="frame" x="56" y="142" width="208" height="21"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Desired Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UOQ-ye-BWV">
+                                <rect key="frame" x="60" y="157" width="200" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-Mail" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A5j-3J-nTZ">
+                                <rect key="frame" x="60" y="206" width="200" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4dj-KF-JZI">
+                                <rect key="frame" x="60" y="250" width="200" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5zp-Xi-NPM">
+                                <rect key="frame" x="136" y="336" width="49" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Submit">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonPressedf:" destination="0Wo-Rb-7sa" eventType="touchUpInside" id="U92-Gy-NSy"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1bm-fL-SV2">
+                                <rect key="frame" x="60" y="81" width="200" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z9h-Yh-7We">
+                                <rect key="frame" x="60" y="119" width="200" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="9PK-f1-1OQ"/>
+                    <connections>
+                        <outlet property="emailBox" destination="A5j-3J-nTZ" id="7hK-lZ-ah0"/>
+                        <outlet property="firstNameBox" destination="1bm-fL-SV2" id="gQo-4t-55p"/>
+                        <outlet property="lastNameBox" destination="Z9h-Yh-7We" id="0LC-xu-sH8"/>
+                        <outlet property="passwordBox" destination="4dj-KF-JZI" id="dOf-XP-irG"/>
+                        <outlet property="usernameBox" destination="UOQ-ye-BWV" id="Ud7-4W-gHB"/>
+                        <segue destination="1CW-gs-5kr" kind="push" identifier="LogSegue" id="yaK-uC-88r"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fXI-4W-0tC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -269,5 +311,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="0GD-1o-rPA"/>
+        <segue reference="yaK-uC-88r"/>
     </inferredMetricsTieBreakers>
 </document>
