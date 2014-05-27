@@ -43,9 +43,12 @@ BOOL start;
     mapView_.mapType = kGMSTypeSatellite;
     mapView_.delegate=self;
     mapView_.settings.tiltGestures=NO;
+    mapView_.settings.consumesGesturesInView=NO;
+    mapView_.settings.myLocationButton=YES;
+    mapView_.settings.compassButton=YES;
+    mapView_.myLocationEnabled=YES;
     [self.view insertSubview:mapView_ atIndex:0];
     [[self navigationController] setNavigationBarHidden:YES animated:NO];
-    start=YES;
     [self.view autoresizesSubviews];
     [mapView_ setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 }
@@ -66,8 +69,8 @@ didTapInfoWindowOfMarker:(GMSMarker *)marker
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     CLLocation *location = [locations lastObject];
-    if(start)
-    {
+
+        [mapView_ clear];
         CLLocationCoordinate2D vancouver = CLLocationCoordinate2DMake(location.coordinate.latitude,location.coordinate.longitude);
         GMSCameraUpdate *vancouverCam = [GMSCameraUpdate setTarget:vancouver];
         [mapView_ moveCamera:vancouverCam];
@@ -78,8 +81,13 @@ didTapInfoWindowOfMarker:(GMSMarker *)marker
         amarker.map = mapView_;
         [locationManager stopUpdatingLocation];
         [mapView_ setSelectedMarker:amarker];
-        start=NO;
-    }
+
+}
+
+- (BOOL) didTapMyLocationButtonForMapView: (GMSMapView *)mapView
+{
+    [locationManager startUpdatingLocation];
+    return NO;
 }
 
 - (void)mapView:(GMSMapView *)mapView
