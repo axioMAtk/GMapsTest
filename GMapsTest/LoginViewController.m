@@ -43,7 +43,7 @@
     {
         username=[UICKeyChainStore stringForKey:@"username"];
         password=[UICKeyChainStore stringForKey:@"password"];
-        [self attemtLogin];
+        [self attemptLogin];
         if(success==1)
         {
             //[UICKeyChainStore setString:username forKey:@"username"];
@@ -65,7 +65,7 @@
     
 }
 
-- (void) attemtLogin
+- (void) attemptLogin
 {
     //NSInteger success = 0;
     success=0;
@@ -112,7 +112,7 @@
    // NSLog(@"message: %i", message);
     
     
-    [self attemtLogin];
+    [self attemptLogin];
     
     if(success==1)
     {

@@ -37,6 +37,7 @@
 		2B3EC1951913E48C00B49FAC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3EC18A1913E48C00B49FAC /* SystemConfiguration.framework */; };
 		2BE94A7C192E889E00269D49 /* HikingNexusHeaderDraft.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BE94A7A192E889E00269D49 /* HikingNexusHeaderDraft.png */; };
 		2BE94A83192E8A4200269D49 /* HikingNexusHeaderRound2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BE94A82192E8A4200269D49 /* HikingNexusHeaderRound2.png */; };
+		2BF2DFBC192E912D00E11A9F /* HN TODO.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2BF2DFBB192E912D00E11A9F /* HN TODO.rtf */; };
 		4349A3F3192A86B900E86F4F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4349A3F2192A86B900E86F4F /* Security.framework */; };
 		436084AF1921404F007926C3 /* HomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 436084AE1921404F007926C3 /* HomeScreenViewController.m */; };
 		43A99F51191A7C1A00573ABF /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A99F50191A7C1A00573ABF /* libsqlite3.dylib */; };
@@ -95,6 +96,7 @@
 		2B3EC18A1913E48C00B49FAC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2BE94A7A192E889E00269D49 /* HikingNexusHeaderDraft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HikingNexusHeaderDraft.png; sourceTree = "<group>"; };
 		2BE94A82192E8A4200269D49 /* HikingNexusHeaderRound2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HikingNexusHeaderRound2.png; sourceTree = "<group>"; };
+		2BF2DFBB192E912D00E11A9F /* HN TODO.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = "HN TODO.rtf"; path = "GMapsTest/HN TODO.rtf"; sourceTree = "<group>"; };
 		4349A3F2192A86B900E86F4F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		436084AD1921404F007926C3 /* HomeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScreenViewController.h; sourceTree = "<group>"; };
 		436084AE1921404F007926C3 /* HomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScreenViewController.m; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				2B3EC1441913E27100B49FAC /* Frameworks */,
 				2B3EC1431913E27100B49FAC /* Products */,
 				D9962C72F98C445CB5BFBC0E /* Pods-GMapsTest.xcconfig */,
+				2BF2DFBB192E912D00E11A9F /* HN TODO.rtf */,
 			);
 			sourceTree = "<group>";
 		};
@@ -346,6 +349,7 @@
 				2BE94A7C192E889E00269D49 /* HikingNexusHeaderDraft.png in Resources */,
 				2B3EC15E1913E27100B49FAC /* Images.xcassets in Resources */,
 				2B3EC1501913E27100B49FAC /* InfoPlist.strings in Resources */,
+				2BF2DFBC192E912D00E11A9F /* HN TODO.rtf in Resources */,
 				2B3EC1591913E27100B49FAC /* Main.storyboard in Resources */,
 				2BE94A83192E8A4200269D49 /* HikingNexusHeaderRound2.png in Resources */,
 				2B3EC17D1913E2F800B49FAC /* GoogleMaps.bundle in Resources */,
