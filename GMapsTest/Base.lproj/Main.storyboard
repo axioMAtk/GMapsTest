@@ -122,7 +122,7 @@
                     <connections>
                         <outlet property="passwordField" destination="lUL-rO-G0Q" id="LMQ-d9-nZ3"/>
                         <outlet property="usernameField" destination="uoD-Pr-51W" id="PCe-Qu-bVC"/>
-                        <segue destination="Q8H-yz-Tdp" kind="modal" identifier="loggedIn" animates="NO" id="0GD-1o-rPA"/>
+                        <segue destination="Q8H-yz-Tdp" kind="push" identifier="loggedIn" id="0GD-1o-rPA"/>
                         <segue destination="Q8H-yz-Tdp" kind="push" identifier="newLogIn" id="Hxh-6g-Kcj"/>
                         <segue destination="0Wo-Rb-7sa" kind="push" identifier="RegistrationSegue" id="PEE-bE-WIu"/>
                     </connections>
@@ -213,7 +213,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="1CW-gs-5kr" kind="relationship" relationship="rootViewController" id="nfo-ZY-iAl"/>
+                        <segue destination="1CW-gs-5kr" kind="relationship" relationship="rootViewController" id="jdn-iU-zbc"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Bp-q9-jkc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -268,6 +268,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Hxh-6g-Kcj"/>
+        <segue reference="0GD-1o-rPA"/>
     </inferredMetricsTieBreakers>
 </document>

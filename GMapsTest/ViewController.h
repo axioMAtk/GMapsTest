@@ -10,17 +10,23 @@
 #import <CoreLocation/CoreLocation.h>
 #import <GoogleMaps/GoogleMaps.h>
 #import "Toast+UIView.h"
+#import <dispatch/dispatch.h>
+#import <PSLocationManager/PSLocationManager.h>
+
 
 @import Security;
 
 
-@interface ViewController : UIViewController <CLLocationManagerDelegate>
+@interface ViewController : UIViewController <PSLocationManagerDelegate>
 {
     IBOutlet UISegmentedControl *Segment;
+    dispatch_queue_t backgroundQueue;
+    dispatch_queue_t backgroundQueue2;
+
 }
 @property (strong, nonatomic)NSMutableArray *elevationStuff;
 @property (strong, nonatomic)NSString* theStringiestStringThatHasEverStringed;
-@property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) PSLocationManager *locationManager;
 @property (strong, nonatomic) NSMutableArray *latArray;
 @property (strong, nonatomic) NSMutableArray *longArray;
 @property (strong, nonatomic) NSMutableArray *altArray;
@@ -32,10 +38,13 @@
 @property (nonatomic) NSUInteger hikeNumber;
 @property (nonatomic) CLLocationDistance totalDistance;
 @property (strong, nonatomic) CLLocation* lastLocation;
+@property (strong, nonatomic) NSTimer* timer;
+//dispatch_queue_t backgroundQueue;
 -(IBAction)switchMapType;
 
-@property (nonatomic) NSInteger minHeight;
-@property (nonatomic) NSInteger maxHeight;
+@property (nonatomic) double minHeight;
+@property (nonatomic) double maxHeight;
+
 
 
 

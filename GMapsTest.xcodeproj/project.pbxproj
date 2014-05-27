@@ -22,7 +22,6 @@
 		2B3EC1671913E27200B49FAC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3EC1491913E27100B49FAC /* UIKit.framework */; };
 		2B3EC16F1913E27200B49FAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2B3EC16D1913E27200B49FAC /* InfoPlist.strings */; };
 		2B3EC1711913E27200B49FAC /* GMapsTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3EC1701913E27200B49FAC /* GMapsTestTests.m */; };
-		2B3EC17B1913E29D00B49FAC /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3EC17A1913E29D00B49FAC /* GoogleMaps.framework */; };
 		2B3EC17D1913E2F800B49FAC /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2B3EC17C1913E2F700B49FAC /* GoogleMaps.bundle */; };
 		2B3EC17F1913E41E00B49FAC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3EC17E1913E41E00B49FAC /* AVFoundation.framework */; };
 		2B3EC18B1913E48C00B49FAC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3EC1801913E48C00B49FAC /* CoreData.framework */; };
@@ -133,7 +132,6 @@
 				2B3EC17F1913E41E00B49FAC /* AVFoundation.framework in Frameworks */,
 				2B3EC1481913E27100B49FAC /* CoreGraphics.framework in Frameworks */,
 				2B3EC14A1913E27100B49FAC /* UIKit.framework in Frameworks */,
-				2B3EC17B1913E29D00B49FAC /* GoogleMaps.framework in Frameworks */,
 				2B3EC1461913E27100B49FAC /* Foundation.framework in Frameworks */,
 				5F1E47A81CB1454DB783F438 /* libPods-GMapsTest.a in Frameworks */,
 			);
@@ -310,7 +308,7 @@
 		2B3EC13A1913E27100B49FAC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Chris Sutton";
 				TargetAttributes = {
 					2B3EC1411913E27100B49FAC = {
@@ -463,7 +461,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -502,7 +499,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -580,7 +576,6 @@
 		2B3EC1781913E27200B49FAC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GMapsTest.app/GMapsTest";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -603,7 +598,6 @@
 		2B3EC1791913E27200B49FAC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GMapsTest.app/GMapsTest";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
