@@ -44,9 +44,9 @@ BOOL start;
     mapView_.delegate=self;
     mapView_.settings.tiltGestures=NO;
     mapView_.settings.consumesGesturesInView=NO;
-    mapView_.settings.myLocationButton=YES;
+    //mapView_.settings.myLocationButton=YES;
     mapView_.settings.compassButton=YES;
-    mapView_.myLocationEnabled=YES;
+    //mapView_.myLocationEnabled=YES;
     [self.view insertSubview:mapView_ atIndex:0];
     [[self navigationController] setNavigationBarHidden:YES animated:NO];
     [self.view autoresizesSubviews];
@@ -84,10 +84,9 @@ didTapInfoWindowOfMarker:(GMSMarker *)marker
 
 }
 
-- (BOOL) didTapMyLocationButtonForMapView: (GMSMapView *)mapView
+- (IBAction) myloc
 {
     [locationManager startUpdatingLocation];
-    return NO;
 }
 
 - (void)mapView:(GMSMapView *)mapView
