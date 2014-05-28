@@ -23,6 +23,7 @@
 }
 
 @synthesize path;
+@synthesize amarker;
 
 //@synthesize dbString;
 
@@ -49,6 +50,10 @@
     NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"base.sqlite"];
     FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
     NSMutableArray *results = [NSMutableArray array];
+    double maxElevation = 1;
+    double maxLatitude;
+    double maxLongitude;
+    
     
     [database open];
     //NSString *dbQuery = [NSString stringWithFormat:@"SELECT * FROM logs8"];
@@ -56,9 +61,20 @@
     FMResultSet *hikeResults = [database executeQuery:dbQuery];
     while ([hikeResults next]) {
         [results addObject:[hikeResults resultDictionary]];
+        if([[[hikeResults resultDictionary] objectForKey:@"elevation"] doubleValue]>maxElevation)
+        {
+            maxElevation=[[[hikeResults resultDictionary] objectForKey:@"elevation"] doubleValue];
+            maxLatitude=[[[hikeResults resultDictionary] objectForKey:@"latitude"] doubleValue];
+            maxLongitude=[[[hikeResults resultDictionary] objectForKey:@"longitude"] doubleValue];
+            
+        }
     }
+    //FMResultSet *maxElevation = [database executeQuery:dbQueryEle];
+    //NSDictionary *elevationDict = [maxElevation resultDictionary];
     
     [database close];
+    
+    
     
     
     NSMutableDictionary *thenDictionary = [[NSMutableDictionary alloc] init];
@@ -86,6 +102,16 @@
     }
     GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
     polyline.map = mapView_;
+    amarker = [[GMSMarker alloc] init];
+    amarker.position = CLLocationCoordinate2DMake(maxLatitude, maxLongitude);
+    NSLog(@"latitude: %f", maxLatitude);
+    NSLog(@"longitude: %f", maxLongitude);
+    NSString *display = [NSNumberFormatter localizedStringFromNumber:@(maxElevation)
+                                                         numberStyle:NSNumberFormatterDecimalStyle];
+    NSString *markerString = [NSString stringWithFormat:@"%@ meters", display];
+    amarker.snippet = markerString;
+    amarker.title = @"Max Elevation";
+    amarker.map = mapView_;
     
     
     //[self updateCamera];

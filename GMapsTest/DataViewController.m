@@ -26,6 +26,9 @@
 @synthesize lastHike;
 @synthesize hikePicker;
 @synthesize dbString;
+@synthesize totalDistance;
+@synthesize totalSpeed;
+@synthesize avgSpeed;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -46,6 +49,42 @@
 {
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     [super viewDidLoad];
+    
+    // Do any additional setup after loading the view.
+    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    //NSString *dbString = appDelegate.dbString;
+    //NSString *dbQuery = [NSString stringWithFormat:@"SELECT * FROM users"];
+    
+    
+    NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDir = [docPaths objectAtIndex:0];
+    NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"base.sqlite"];
+    FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
+    NSMutableArray *results = [NSMutableArray array];
+    double maxElevation = 1;
+    double maxLatitude;
+    double maxLongitude;
+    
+    
+    [database open];
+    //NSString *dbQuery = [NSString stringWithFormat:@"SELECT * FROM logs8"];
+    
+    FMResultSet *hikeResults = [database executeQuery:@"SELECT * FROM hikes"];
+    while ([hikeResults next]) {
+        [results addObject:[hikeResults resultDictionary]];
+        totalDistance += [[[hikeResults resultDictionary] objectForKey:@"distance"] doubleValue];
+        totalSpeed += ([[[hikeResults resultDictionary] objectForKey:@"distance"] doubleValue]*[[[hikeResults resultDictionary] objectForKey:@"avgSpeed"] doubleValue]);
+        
+    }
+    
+    avgSpeed = (totalSpeed/totalDistance);
+    
+    //FMResultSet *maxElevation = [database executeQuery:dbQueryEle];
+    //NSDictionary *elevationDict = [maxElevation resultDictionary];
+    
+    [database close];
+    
+    
     // Do any additional setup after loading the view.
     
     /*NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -192,7 +231,7 @@
     
     [database close];
     
-    return [[results objectAtIndex:row] objectForKey:@"time"];
+    return [[results objectAtIndex:row] objectForKey:@"name"];
     
     
     //return [colorArray objectAtIndex:row];

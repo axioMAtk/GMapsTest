@@ -12,6 +12,7 @@
 
 @interface PastMapViewController : UIViewController <CLLocationManagerDelegate>
 @property (strong, nonatomic) GMSMutablePath *path;
+@property (strong,nonatomic) GMSMarker *amarker;
 //@property (strong, nonatomic) NSMutableString *dbString;
 
 

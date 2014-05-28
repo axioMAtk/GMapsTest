@@ -17,7 +17,7 @@
 {
     // Override point for customization after application launch.
     [GMSServices provideAPIKey:@"AIzaSyAlDakcBveHB6pyPqqkU-6RbHO2pGFiT2g"];
-    [UICKeyChainStore removeItemForKey:@"password"];
+    //[UICKeyChainStore removeItemForKey:@"password"];
     //[UICKeyChainStore removeItemForKey:@"username"];
     //[UICKeyChainStore setString:@"nlundie" forKey:@"username"];
     
@@ -33,7 +33,7 @@
     
     FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
     [database open];
-    [database executeUpdate:@"CREATE TABLE hikes (number INTEGER PRIMARY KEY AUTOINCREMENT, time datetime)"];
+    [database executeUpdate:@"CREATE TABLE hikes (number INTEGER PRIMARY KEY AUTOINCREMENT, time datetime, avgSpeed Double, name Varchar(100), distance Double)"];
     [database executeUpdate:@"CREATE TABLE logs (latitude Double, longitude Double, elevation Double, horizontalAccuracy Double, verticalAccuracy Double, time datetime, hikeNumber int, hasBeenSent tinyint(1) DEFAULT 0)"];
     [database close];
     NSLog(@"created hikes table in database");
