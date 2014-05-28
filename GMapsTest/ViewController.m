@@ -13,7 +13,6 @@
 #import "FMDatabase.h"
 #import "FMDatabaseAdditions.h"
 
-
 @interface ViewController ()
 
 @end
@@ -39,6 +38,7 @@
 @synthesize minHeight;
 
 - (void)viewDidLoad {
+    [Segment.layer setCornerRadius:7.0f];
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     // Create a GMSCameraPosition that tells the map to display the
     // coordinate -33.85,151.20 at zoom level 15.
@@ -397,13 +397,15 @@
 
 - (IBAction)showStats:(id)sender {
     
+    //[toast hideToast];
+    
     NSString *display = [NSNumberFormatter localizedStringFromNumber:@(totalDistance)
                                                          numberStyle:NSNumberFormatterDecimalStyle];
     NSString *toastString = [NSString stringWithFormat:@"Total Distance: %@ %@ \n %@ %.2ld \n %@ %.2ld", display, @" m", @"Max Height", (long)maxHeight, @"Min Height", (long)minHeight];
     //int aNum = 2000000;
     
     [self.view makeToast:toastString
-                duration:100
+                duration:60
                 position:[NSValue valueWithCGPoint:CGPointMake(160, 400)]];
     
     
@@ -412,7 +414,7 @@
     // location services is probably not enabled for the app
     //self.strengthLabel.text = NSLocalizedString(@"Unable to determine location", @"");
     [self.view makeToast:@"Unable to determine location"
-                duration:100
+                duration:30
                 position:[NSValue valueWithCGPoint:CGPointMake(160, 400)]];
 }
 
