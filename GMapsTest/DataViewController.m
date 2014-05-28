@@ -124,7 +124,7 @@
     
     //[UICKeyChainStore setString:@"testUser" forKey:@"username"];
     //[UICKeyChainStore setString:@"peenpeen" forKey:@"password"];
-    dbString = [NSMutableString stringWithFormat:@"%d", 0];
+    dbString = [NSMutableString stringWithFormat:@"%d", 1];
     
     
     
@@ -239,8 +239,8 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row   inComponent:(NSInteger)component
 {
-    NSLog(@"Selected Row %ld", (long)row);
-    dbString = [NSMutableString stringWithFormat:@"%ld", (long)row];
+    NSLog(@"Selected Row %ld", ((long)row+1));
+    dbString = [NSMutableString stringWithFormat:@"%ld", ((long)row+1)];
     //AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     //appDelegate.dbString = dbString;
    // NSLog(@"&(row): %d", &(row));
