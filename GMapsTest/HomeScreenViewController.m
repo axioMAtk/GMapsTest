@@ -69,7 +69,7 @@ didTapInfoWindowOfMarker:(GMSMarker *)marker
     
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     alert.tag = 12;
-    
+    [[alert textFieldAtIndex:0] setPlaceholder:@"New Hike Name"];
     [alert addButtonWithTitle:@"Begin"];
     [alert show];
     //[self performSegueWithIdentifier:@"woot" sender:self];
@@ -82,8 +82,16 @@ didTapInfoWindowOfMarker:(GMSMarker *)marker
             UITextField *textfield = [alertView textFieldAtIndex:0];
             NSLog(@"hike Name: %@", textfield.text);
             AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-            appDelegate.hikeName = textfield.text;
-            [self performSegueWithIdentifier:@"woot" sender:self];
+            if (![textfield.text isEqual:@""]) {
+                appDelegate.hikeName = textfield.text;
+                [self performSegueWithIdentifier:@"woot" sender:self];
+            }
+            else
+            {
+                [self.view makeToast:@"NAME YOUR HIKE, BITCH"
+                            duration:60
+                            position:[NSValue valueWithCGPoint:CGPointMake(160, 150)]];
+            }
         }
     }
 }

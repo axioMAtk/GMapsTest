@@ -13,6 +13,7 @@
 #import "FMDatabase.h"
 #import "FMDatabaseAdditions.h"
 #import "UICKeyChainStore.h"
+#import "Toast+UIView.h"
 
 
 @import Security;
