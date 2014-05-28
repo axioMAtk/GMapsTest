@@ -111,7 +111,7 @@
      NSUInteger count = [database intForQuery:@"SELECT COUNT(rowid) FROM hikes"];
     hikeNumber = count;
     [database executeUpdate:@"INSERT INTO hikes (time) VALUES (?)", dateString, nil];
-    countString = [NSString stringWithFormat:@"%d", count];
+    countString = [NSString stringWithFormat:@"%d", (count+1)];
     NSString *logsString = [NSString stringWithFormat:@"logs%@", countString];
     //NSString *queryString = [NSString stringWithFormat:@"CREATE TABLE logs%@ (latitude Double, longitude Double, elevation Double, horizontalAccuracy Double, verticalAccuracy Double, time datetime)", countString];
     //[database executeUpdate:queryString];
@@ -427,8 +427,8 @@
     NSString *documentsDir = [docPaths objectAtIndex:0];
     NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"base.sqlite"];
     FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
-    double averageSpeed;
-   // averageSpeed = [speedArray valueForKeyPath:@"@avg.doubleValue"];
+    
+   double averageSpeed = [[speedArray valueForKeyPath:@"@avg.doubleValue"] doubleValue];
     NSLog(@"average speed: %@", [speedArray valueForKeyPath:@"@avg.doubleValue"]);
     
     [database open];
@@ -437,7 +437,8 @@
         NSDictionary *theDictionary = [log objectAtIndex:x];
         [database executeUpdate:@"INSERT INTO logs (latitude, longitude, elevation, horizontalAccuracy, verticalAccuracy, time, hikeNumber) VALUES (?, ?, ?, ?, ?, ?, ?)", [theDictionary objectForKey:@"latitude"], [theDictionary objectForKey:@"longitude"], [theDictionary objectForKey:@"elevation"], [theDictionary objectForKey:@"horizontalAccuracy"], [theDictionary objectForKey:@"verticalAccuracy"], [theDictionary objectForKey:@"time"], countString, nil];
     }
-    
+    [database executeUpdateWithFormat:@"UPDATE hikes SET avgSpeed = %@ where number = %@", [speedArray valueForKeyPath:@"@avg.doubleValue"], countString];
+
     [database close];
     NSLog(@"dumped array to database");
     
