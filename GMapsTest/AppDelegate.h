@@ -19,6 +19,7 @@
 @property (strong, nonatomic) NSString* databaseName;
 @property (strong, nonatomic) NSString* databasePath;
 @property (strong, nonatomic) NSString* dbString;
+@property (strong, nonatomic) NSString* hikeName;
 //test push stuff
 
 @end

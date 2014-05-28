@@ -9,6 +9,7 @@
 #import "HomeScreenViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import "CoreLocation/CoreLocation.h"
+#import "AppDelegate.h"
 
 
 @interface HomeScreenViewController () <GMSMapViewDelegate>
@@ -63,7 +64,28 @@ BOOL start;
 didTapInfoWindowOfMarker:(GMSMarker *)marker
 {
     //[self newHike];
-    [self performSegueWithIdentifier:@"woot" sender:self];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New Hike" message:@"Please name your hike" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+    
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    alert.tag = 12;
+    
+    [alert addButtonWithTitle:@"Begin"];
+    [alert show];
+    //[self performSegueWithIdentifier:@"woot" sender:self];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 12) {
+        if (buttonIndex == 1) {
+            UITextField *textfield = [alertView textFieldAtIndex:0];
+            NSLog(@"hike Name: %@", textfield.text);
+            AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+            appDelegate.hikeName = textfield.text;
+            [self performSegueWithIdentifier:@"woot" sender:self];
+        }
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations

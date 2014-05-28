@@ -12,6 +12,7 @@
 #import "sqlite3.h"
 #import "FMDatabase.h"
 #import "FMDatabaseAdditions.h"
+#import "AppDelegate.h"
 
 
 @interface ViewController ()
@@ -110,7 +111,8 @@
     [database open];
      NSUInteger count = [database intForQuery:@"SELECT COUNT(rowid) FROM hikes"];
     hikeNumber = count;
-    [database executeUpdate:@"INSERT INTO hikes (time) VALUES (?)", dateString, nil];
+    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    [database executeUpdate:@"INSERT INTO hikes (time, name) VALUES (?, ?)", dateString, appDelegate.hikeName, nil];
     countString = [NSString stringWithFormat:@"%d", (count+1)];
     NSString *logsString = [NSString stringWithFormat:@"logs%@", countString];
     //NSString *queryString = [NSString stringWithFormat:@"CREATE TABLE logs%@ (latitude Double, longitude Double, elevation Double, horizontalAccuracy Double, verticalAccuracy Double, time datetime)", countString];
