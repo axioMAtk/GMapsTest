@@ -440,6 +440,8 @@
         [database executeUpdate:@"INSERT INTO logs (latitude, longitude, elevation, horizontalAccuracy, verticalAccuracy, time, hikeNumber) VALUES (?, ?, ?, ?, ?, ?, ?)", [theDictionary objectForKey:@"latitude"], [theDictionary objectForKey:@"longitude"], [theDictionary objectForKey:@"elevation"], [theDictionary objectForKey:@"horizontalAccuracy"], [theDictionary objectForKey:@"verticalAccuracy"], [theDictionary objectForKey:@"time"], countString, nil];
     }
     [database executeUpdateWithFormat:@"UPDATE hikes SET avgSpeed = %@ where number = %@", [speedArray valueForKeyPath:@"@avg.doubleValue"], countString];
+    
+    [database executeUpdateWithFormat:@"UPDATE hikes SET distance = %f where number = %@", totalDistance, countString];
 
     [database close];
     NSLog(@"dumped array to database");

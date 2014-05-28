@@ -14,6 +14,9 @@
 @property (strong, nonatomic) NSMutableArray* lastHike;
 @property (strong, nonatomic) IBOutlet UIPickerView *hikePicker;
 @property (strong, nonatomic) NSMutableString* dbString;
+@property (nonatomic) double totalDistance;
+@property (nonatomic) double totalSpeed;
+@property (nonatomic) double avgSpeed;
 
 
 
