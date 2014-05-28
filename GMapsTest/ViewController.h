@@ -39,6 +39,8 @@
 @property (nonatomic) CLLocationDistance totalDistance;
 @property (strong, nonatomic) CLLocation* lastLocation;
 @property (strong, nonatomic) NSTimer* timer;
+@property (strong, nonatomic) NSMutableArray* speedArray;
+
 //dispatch_queue_t backgroundQueue;
 -(IBAction)switchMapType;
 

@@ -37,6 +37,7 @@
 @synthesize lastLocation;
 @synthesize maxHeight;
 @synthesize minHeight;
+@synthesize speedArray;
 
 - (void)viewDidLoad {
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
@@ -88,6 +89,7 @@
    // altArray = [[NSMutableArray alloc] init];
     //latArray = [[NSMutableArray alloc] init];
     //longArray = [[NSMutableArray alloc] init];
+    speedArray = [[NSMutableArray alloc] init];
     log = [[NSMutableArray alloc] init];
     JSONlog = [[NSMutableArray alloc] init];
     //hikeNumber = [[NSUInteger alloc] init];
@@ -135,7 +137,7 @@
 {
     
 
-    [self foundLocation:waypoint];
+    [self foundLocation:waypoint withSpeed:calculatedSpeed];
     
     //[self foundLocation:manager.location];
     
@@ -255,11 +257,14 @@
 
 
 
-- (void)foundLocation:(CLLocation *)location
+- (void)foundLocation:(CLLocation *)location withSpeed:(double)calculatedSpeed
 {
     //CLLocation *location = [locations lastObject];
     //CLLocationDistance distance = [location distanceFromLocation:lastLocation];
     totalDistance = locationManager.totalDistance;
+    [speedArray addObject:[NSNumber numberWithDouble:calculatedSpeed]];
+    
+    
     NSLog(@"Total Distance: %.2f", totalDistance);
    NSString *currentLatitude = [[NSString alloc]
                                  initWithFormat:@"%+.6f",
@@ -399,7 +404,7 @@
     
     NSString *display = [NSNumberFormatter localizedStringFromNumber:@(totalDistance)
                                                          numberStyle:NSNumberFormatterDecimalStyle];
-    NSString *toastString = [NSString stringWithFormat:@"Total Distance: %@ %@ \n %@ %.2ld \n %@ %.2ld", display, @" m", @"Max Height", (long)maxHeight, @"Min Height", (long)minHeight];
+    NSString *toastString = [NSString stringWithFormat:@"Total Distance: %@ %@ \n average speed: %.02f \n current speed: %.02f \n %@ %.2ld \n %@ %.2ld", display, @" m", [[speedArray valueForKeyPath:@"@avg.doubleValue"] doubleValue],  [[speedArray lastObject] doubleValue], @"Max Height", (long)maxHeight, @"Min Height", (long)minHeight];
     //int aNum = 2000000;
     
     [self.view makeToast:toastString
@@ -422,6 +427,9 @@
     NSString *documentsDir = [docPaths objectAtIndex:0];
     NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"base.sqlite"];
     FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
+    double averageSpeed;
+   // averageSpeed = [speedArray valueForKeyPath:@"@avg.doubleValue"];
+    NSLog(@"average speed: %@", [speedArray valueForKeyPath:@"@avg.doubleValue"]);
     
     [database open];
     for(int x=0; x<log.count; x++)
