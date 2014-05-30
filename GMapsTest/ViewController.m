@@ -121,6 +121,9 @@
     
     maxHeight=-9999999;
     minHeight=99999999;
+    //self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+    
+    //self.progressView.center = self.view.center;
 
     
 }
@@ -427,6 +430,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [locationManager stopLocationUpdates];
+    //[self.view addSubview:self.progressView];
     NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDir = [docPaths objectAtIndex:0];
     NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"base.sqlite"];
@@ -438,6 +442,8 @@
     [database open];
     for(int x=0; x<log.count; x++)
     {
+       // self.progressView.progress = x/log.count;
+        
         NSDictionary *theDictionary = [log objectAtIndex:x];
         [database executeUpdate:@"INSERT INTO logs (latitude, longitude, elevation, horizontalAccuracy, verticalAccuracy, time, hikeNumber) VALUES (?, ?, ?, ?, ?, ?, ?)", [theDictionary objectForKey:@"latitude"], [theDictionary objectForKey:@"longitude"], [theDictionary objectForKey:@"elevation"], [theDictionary objectForKey:@"horizontalAccuracy"], [theDictionary objectForKey:@"verticalAccuracy"], [theDictionary objectForKey:@"time"], countString, nil];
     }

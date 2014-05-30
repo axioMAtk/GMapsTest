@@ -72,12 +72,12 @@
     FMResultSet *hikeResults = [database executeQuery:@"SELECT * FROM hikes"];
     while ([hikeResults next]) {
         [results addObject:[hikeResults resultDictionary]];
-        totalDistance += [[[hikeResults resultDictionary] objectForKey:@"distance"] doubleValue];
-        totalSpeed += ([[[hikeResults resultDictionary] objectForKey:@"distance"] doubleValue]*[[[hikeResults resultDictionary] objectForKey:@"avgSpeed"] doubleValue]);
+        //totalDistance += [[[hikeResults resultDictionary] objectForKey:@"distance"] doubleValue];
+        //totalSpeed += ([[[hikeResults resultDictionary] objectForKey:@"distance"] doubleValue]*[[[hikeResults resultDictionary] objectForKey:@"avgSpeed"] doubleValue]);
         
     }
     
-    avgSpeed = (totalSpeed/totalDistance);
+    //avgSpeed = (totalSpeed/totalDistance);
     
     //FMResultSet *maxElevation = [database executeQuery:dbQueryEle];
     //NSDictionary *elevationDict = [maxElevation resultDictionary];

@@ -40,6 +40,7 @@
 @property (strong, nonatomic) CLLocation* lastLocation;
 @property (strong, nonatomic) NSTimer* timer;
 @property (strong, nonatomic) NSMutableArray* speedArray;
+//@property (nonatomic, strong) UIProgressView *progressView;
 
 //dispatch_queue_t backgroundQueue;
 -(IBAction)switchMapType;
