@@ -39,7 +39,7 @@ BOOL start;
     [locationManager startUpdatingLocation];
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.85
                                                             longitude:151.20
-                                                                 zoom:11];
+                                                                 zoom:15];
     mapView_ = [GMSMapView mapWithFrame:self.view.bounds camera:camera];
     mapView_.mapType = kGMSTypeSatellite;
     mapView_.delegate=self;
@@ -88,7 +88,7 @@ didTapInfoWindowOfMarker:(GMSMarker *)marker
             }
             else
             {
-                [self.view makeToast:@"NAME YOUR HIKE, BITCH"
+                [self.view makeToast:@"NAME YOUR HIKE"
                             duration:60
                             position:[NSValue valueWithCGPoint:CGPointMake(160, 150)]];
             }
