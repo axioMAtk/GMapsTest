@@ -65,6 +65,7 @@
     //mapView_.settings.myLocationButton = YES;
     mapView_.mapType = kGMSTypeSatellite;
     [self.view insertSubview:mapView_ atIndex:0];
+    [self.view autoresizesSubviews];
     [mapView_ setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
     
     // Creates a marker in the center of the map.
