@@ -1,6 +1,6 @@
 GMapsTest
 =========
 
-initial test application
- 
-This is the preliminary form of our app. It can currently log an user's location, location accuracy, and time of logging. It also prints out the user's path on a map, so overall it's pretty neat!
+Here is Nate Lundie and Chris Sutton's Senior Project Application! 
+
+it tracks an user on their hikes, allows them to save all of their hike data to a remote server in Utah, see their past hikes, and much much more!
