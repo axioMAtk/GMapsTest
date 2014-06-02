@@ -3,8 +3,12 @@
 //  GMapsTest
 //
 //  Created by Nate Lundie on 5/12/14.
-//  Copyright (c) 2014 Chris Sutton. All rights reserved.
-//
+//  Copyright (c) 2014 Chris Sutton and Nate Lundie. All rights reserved.
+/**
+ the main homescreen of our app, allows you to create a hike,  and see past hikes. it automatically moves to your location upon opening 
+ 
+ 
+ **/
 
 #import "HomeScreenViewController.h"
 #import <GoogleMaps/GoogleMaps.h>

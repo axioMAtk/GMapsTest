@@ -3,8 +3,11 @@
 //  GMapsTest
 //
 //  Created by Nate Lundie on 5/22/14.
-//  Copyright (c) 2014 Chris Sutton. All rights reserved.
-//
+//  Copyright (c) 2014 Chris Sutton Nate Lundie. All rights reserved.
+/**
+ allows the user to input their username and password and attempt a login. If there is a username and password stored in the keychain it will attempt to login automagically, and the user won't even notice and will just be at the home screen of the app
+ 
+ **/
 
 #import "LoginViewController.h"
 #import "Toast+UIView.h"
@@ -30,6 +33,8 @@
     return self;
 }
 
+
+//initialize the view, and attempt a login if both username and password exist in the keychain
 - (void)viewDidLoad
 {
     
@@ -65,6 +70,7 @@
     
 }
 
+//attempt a login with a given username and password
 - (void) attemptLogin:(NSString *)usernamet withPass:(NSString *)passwordt
 {
     //NSInteger success = 0;
@@ -140,6 +146,7 @@
     
 }
 
+//go to the registration view if you click the registration button
 - (IBAction)registerButton:(id)sender
 {
     [self performSegueWithIdentifier: @"RegistrationSegue" sender: self];

@@ -4,7 +4,12 @@
 //
 //  Created by Chris Sutton and Nate Lundie on 5/2/14.
 //  Copyright (c) 2014 Chris Sutton and Nate Lundie. All rights reserved.
-//
+/**
+ This where the real magic happens.
+ 
+ follows you, shows the path you took, saves all your location related things to an array, when you exit it dumps that array into a local sqlite database.
+ 
+ **/
 
 #import "ViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
@@ -59,9 +64,14 @@
     //locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.delegate = self;
     [locationManager prepLocationUpdates];
+    
+    
+    //#threading
     dispatch_sync(backgroundQueue, ^(void) {
         [locationManager startLocationUpdates];
     });
+    
+    
     //[locationManager startUpdatingLocation];
     //[locationManager startUpdatingLocation];
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.85
@@ -152,7 +162,9 @@
 {
     
 
+    //we used to do all the foundLocation stuff in here (as you can see from all that commented out stuff) but that led to instability real fast, so now we do it elsewhere
     [self foundLocation:waypoint withSpeed:calculatedSpeed];
+    
     
     //[self foundLocation:manager.location];
     
@@ -274,8 +286,13 @@
 
 - (void)foundLocation:(CLLocation *)location withSpeed:(double)calculatedSpeed
 {
+    //this is that elsewhere I talked about earlier
+    
+    
     //CLLocation *location = [locations lastObject];
     //CLLocationDistance distance = [location distanceFromLocation:lastLocation];
+    
+    
     totalDistance = locationManager.totalDistance;
     [speedArray addObject:[NSNumber numberWithDouble:calculatedSpeed]];
     
@@ -412,6 +429,7 @@
     }
 }
 
+//this lets you change your map type
 -(IBAction)switchMapType{
 	if(Segment.selectedSegmentIndex == 0){
 		mapView_.mapType = kGMSTypeSatellite;
@@ -425,6 +443,7 @@
 }
 
 
+//shows yo stats
 - (IBAction)showStats:(id)sender {
     
     //[toast hideToast];
@@ -461,6 +480,7 @@
                 position:[NSValue valueWithCGPoint:CGPointMake(160, 400)]];
 }
 
+//saves stuff when you leave this view
 - (void)viewWillDisappear:(BOOL)animated {
     [locationManager stopLocationUpdates];
     //[self.view addSubview:self.progressView];

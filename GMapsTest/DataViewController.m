@@ -3,8 +3,11 @@
 //  GMapsTest
 //
 //  Created by Nate Lundie on 5/14/14.
-//  Copyright (c) 2014 Chris Sutton. All rights reserved.
-//
+//  Copyright (c) 2014 Chris Sutton and Nate Lundie. All rights reserved.
+/**
+ has a picker that displays a list of your hikes, and displays them, if you click 'show on map' whichever hike is selected will be shown on a map with various bits of info
+ 
+ **/
 
 #import "DataViewController.h"
 #import "sqlite3.h"
@@ -45,6 +48,8 @@
     }
 }
 
+
+//creates picker, populates it with hike names, and initializes dbstring
 - (void)viewDidLoad
 {
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
@@ -135,6 +140,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+//sends all not yet sent things from the local database to a remote database in Utah
 - (IBAction)sendStuffPlaces:(id)sender {
    
     NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -198,6 +205,7 @@
     
 }
 
+//checks how many hikes you've done, and makes there be that many rows in the picker
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent: (NSInteger)component
 {
     
@@ -214,6 +222,7 @@
     return count;
 }
 
+//gets the name of each hike, and puts it in the picker 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row   forComponent:(NSInteger)component
 {
     NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

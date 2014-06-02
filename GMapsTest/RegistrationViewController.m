@@ -3,8 +3,12 @@
 //  GMapsTest
 //
 //  Created by Nate Lundie on 5/27/14.
-//  Copyright (c) 2014 Chris Sutton. All rights reserved.
-//
+//  Copyright (c) 2014 Chris Sutton and Nate Lundie. All rights reserved.
+/**
+ Allows the user to register an account, which will then be sent to our server for future logging in
+ 
+ if the account is succesfully created it then takes them to the login screen, where they can use that shiny new login
+ **/
 
 #import "RegistrationViewController.h"
 

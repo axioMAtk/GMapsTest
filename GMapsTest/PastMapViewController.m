@@ -3,8 +3,11 @@
 //  GMapsTest
 //
 //  Created by Nate Lundie on 5/14/14.
-//  Copyright (c) 2014 Chris Sutton. All rights reserved.
-//
+//  Copyright (c) 2014 Chris Sutton and Nate Lundie. All rights reserved.
+/**
+ Allows an user to look at their past hikes, they can also see where their maximum elevation was, see their start point and time, and see their end point and total distance
+ 
+ **/
 
 #import "PastMapViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
@@ -126,6 +129,8 @@
     }
     GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
     polyline.map = mapView_;
+    
+    //amarker creates a marker that shows where and what the maximum elevation of a specific hike was
     amarker = [[GMSMarker alloc] init];
     amarker.position = CLLocationCoordinate2DMake(maxLatitude, maxLongitude);
     NSLog(@"latitude: %f", maxLatitude);
@@ -137,12 +142,14 @@
     amarker.title = @"Max Elevation";
     amarker.map = mapView_;
     
+    //bmarker creates a marker that shows where an when you started the hike
     bmarker = [[GMSMarker alloc] init];
     bmarker.position = CLLocationCoordinate2DMake([[thenDictionary objectForKey:@"latitude"] doubleValue], [[thenDictionary objectForKey:@"longitude"] doubleValue]);
     bmarker.title = @"Start";
     bmarker.snippet = [thenDictionary objectForKey:@"time"];
     bmarker.map = mapView_;
     
+    //cmarker creates a marker that shows the end point of your hike, and says how long it was in meters
     cmarker = [[GMSMarker alloc] init];
     cmarker.position = CLLocationCoordinate2DMake([[thennDictionary objectForKey:@"latitude"] doubleValue], [[thennDictionary objectForKey:@"longitude"] doubleValue]);
     cmarker.title = @"End";

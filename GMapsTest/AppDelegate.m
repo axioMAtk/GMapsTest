@@ -15,11 +15,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+   /**
+    this initializes the app, it defines the sdk key, which is necessary to use google maps, also checks if the local database structure exists, and if not, creates it
+    **/
+    
+    
     // Override point for customization after application launch.
     [GMSServices provideAPIKey:@"AIzaSyAlDakcBveHB6pyPqqkU-6RbHO2pGFiT2g"];
     //[UICKeyChainStore removeItemForKey:@"password"];
     //[UICKeyChainStore removeItemForKey:@"username"];
     //[UICKeyChainStore setString:@"nlundie" forKey:@"username"];
+    
     
     BOOL success;
     NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
