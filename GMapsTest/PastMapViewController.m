@@ -24,6 +24,12 @@
 
 @synthesize path;
 @synthesize amarker;
+@synthesize bmarker;
+@synthesize cmarker;
+@synthesize totalDiastance;
+@synthesize avgSpeed;
+@synthesize maxElevation;
+@synthesize minElevation;
 
 //@synthesize dbString;
 
@@ -50,7 +56,7 @@
     NSString *dbPath = [documentsDir   stringByAppendingPathComponent:@"base.sqlite"];
     FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
     NSMutableArray *results = [NSMutableArray array];
-    double maxElevation = 1;
+    maxElevation = 1;
     double maxLatitude;
     double maxLongitude;
     
@@ -59,6 +65,10 @@
     //NSString *dbQuery = [NSString stringWithFormat:@"SELECT * FROM logs8"];
     
     FMResultSet *hikeResults = [database executeQuery:dbQuery];
+    FMResultSet *hikeStats = [database executeQuery:@"SELECT * FROM hikes WHERE number = ?", appDelegate.dbString];
+    totalDiastance = [[[hikeStats resultDictionary] objectForKey:@"distance"] doubleValue];
+    avgSpeed = [[[hikeStats resultDictionary] objectForKey:@"avgSpeed"] doubleValue];
+    
     while ([hikeResults next]) {
         [results addObject:[hikeResults resultDictionary]];
         if([[[hikeResults resultDictionary] objectForKey:@"elevation"] doubleValue]>maxElevation)
@@ -80,6 +90,9 @@
     NSMutableDictionary *thenDictionary = [[NSMutableDictionary alloc] init];
     thenDictionary = [results objectAtIndex:0];
     
+    NSMutableDictionary *thennDictionary = [[NSMutableDictionary alloc] init];
+    thennDictionary = [results lastObject];
+    
     
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[[thenDictionary objectForKey:@"latitude"] doubleValue]
                                                             longitude:[[thenDictionary objectForKey:@"longitude"] doubleValue]
@@ -87,6 +100,9 @@
     mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     mapView_.mapType = kGMSTypeSatellite;
     self.view = mapView_;
+    //[self.view insertSubview:mapView_ atIndex:0];
+    //[self.view autoresizesSubviews];
+    //[mapView_ setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
     path = [[GMSMutablePath alloc] init];
     
     
@@ -113,6 +129,18 @@
     amarker.title = @"Max Elevation";
     amarker.map = mapView_;
     
+    bmarker = [[GMSMarker alloc] init];
+    bmarker.position = CLLocationCoordinate2DMake([[thenDictionary objectForKey:@"latitude"] doubleValue], [[thenDictionary objectForKey:@"longitude"] doubleValue]);
+    bmarker.title = @"Start";
+    bmarker.snippet = [thenDictionary objectForKey:@"time"];
+    bmarker.map = mapView_;
+    
+    cmarker = [[GMSMarker alloc] init];
+    cmarker.position = CLLocationCoordinate2DMake([[thennDictionary objectForKey:@"latitude"] doubleValue], [[thennDictionary objectForKey:@"longitude"] doubleValue]);
+    cmarker.title = @"end";
+    NSString *distString = [NSString stringWithFormat:@"Total Distance: %.2f m", totalDiastance];
+    cmarker.snippet = distString;
+    cmarker.map = mapView_;
     
     //[self updateCamera];
     
@@ -141,6 +169,18 @@
 
 
 
+}
+- (IBAction)statsButton:(id)sender {
+    
+    //NSString *display = [NSNumberFormatter localizedStringFromNumber:@(totalDistance)
+      //                                                   numberStyle:NSNumberFormatterDecimalStyle];
+    NSString *toastString = [NSString stringWithFormat:@"Total Distance: %.02f %@ \n average speed: %.02f m/s \n Max Elevation: %.2f m", totalDiastance, @" m", avgSpeed, maxElevation];
+    //int aNum = 2000000;
+    
+    [self.view makeToast:toastString
+                duration:60
+                position:[NSValue valueWithCGPoint:CGPointMake(160, 400)]];
+    
 }
 
 
