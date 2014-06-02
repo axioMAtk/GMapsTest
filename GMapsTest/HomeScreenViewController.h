@@ -22,6 +22,7 @@
 @interface HomeScreenViewController : UIViewController <CLLocationManagerDelegate> {
     CLLocationManager *hsLocationManager;
     IBOutlet UIButton *mylocbtn;
+    IBOutlet UIButton *pastHike;
 }
 
 @property (strong,nonatomic) GMSCameraPosition *currentcam;
