@@ -111,8 +111,11 @@
     {
         NSMutableDictionary *thenDictionary = [[NSMutableDictionary alloc] init];
         thenDictionary = [results objectAtIndex:x];
+        
         //NSLog(@"latitude: %f", [[thenDictionary objectForKey:@"latitude"] doubleValue]);
         //NSLog(@"longitude: %f", [[thenDictionary objectForKey:@"longitude"] doubleValue]);
+        
+        
         
         [path addCoordinate:CLLocationCoordinate2DMake([[thenDictionary objectForKey:@"latitude"] doubleValue], [[thenDictionary objectForKey:@"longitude"] doubleValue])];
     }
@@ -137,8 +140,8 @@
     
     cmarker = [[GMSMarker alloc] init];
     cmarker.position = CLLocationCoordinate2DMake([[thennDictionary objectForKey:@"latitude"] doubleValue], [[thennDictionary objectForKey:@"longitude"] doubleValue]);
-    cmarker.title = @"end";
-    NSString *distString = [NSString stringWithFormat:@"Total Distance: %.2f m", totalDiastance];
+    cmarker.title = @"End";
+    NSString *distString = [thennDictionary objectForKey:@"time"];
     cmarker.snippet = distString;
     cmarker.map = mapView_;
     
