@@ -33,6 +33,12 @@ BOOL start;
         NSLog(@"test: %@", [UICKeyChainStore stringForKey:@"test"]);
     }
     //NSLog(@"height: %fl", CGRectGetHeight(self.view.bounds));
+    [mylocbtn.layer setCornerRadius:7.0f];
+    [pastHike.layer setCornerRadius:7.0f];
+    pastHike.layer.borderWidth=1.0f;
+    pastHike.layer.borderColor=[[UIColor colorWithRed:0 green:0 blue:1 alpha:.5] CGColor];
+    mylocbtn.layer.borderWidth=1.0f;
+    mylocbtn.layer.borderColor=[[UIColor colorWithRed:0 green:0 blue:1 alpha:.5] CGColor];
     locationManager = [[CLLocationManager alloc] init];
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.delegate = self;
