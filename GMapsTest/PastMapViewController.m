@@ -66,8 +66,13 @@
     
     FMResultSet *hikeResults = [database executeQuery:dbQuery];
     FMResultSet *hikeStats = [database executeQuery:@"SELECT * FROM hikes WHERE number = ?", appDelegate.dbString];
+    
+    while ([hikeStats next]) {
+        
+        
     totalDiastance = [[[hikeStats resultDictionary] objectForKey:@"distance"] doubleValue];
     avgSpeed = [[[hikeStats resultDictionary] objectForKey:@"avgSpeed"] doubleValue];
+    }
     
     while ([hikeResults next]) {
         [results addObject:[hikeResults resultDictionary]];
@@ -141,7 +146,7 @@
     cmarker = [[GMSMarker alloc] init];
     cmarker.position = CLLocationCoordinate2DMake([[thennDictionary objectForKey:@"latitude"] doubleValue], [[thennDictionary objectForKey:@"longitude"] doubleValue]);
     cmarker.title = @"End";
-    NSString *distString = [thennDictionary objectForKey:@"time"];
+    NSString *distString = [NSString stringWithFormat:@"Total Distance: %.2f m", totalDiastance];
     cmarker.snippet = distString;
     cmarker.map = mapView_;
     
