@@ -20,6 +20,8 @@
 @interface ViewController : UIViewController <PSLocationManagerDelegate>
 {
     IBOutlet UISegmentedControl *Segment;
+    IBOutlet UIButton *stats;
+    IBOutlet UIButton *zoom;
     dispatch_queue_t backgroundQueue;
     dispatch_queue_t backgroundQueue2;
 
@@ -47,9 +49,6 @@
 
 @property (nonatomic) double minHeight;
 @property (nonatomic) double maxHeight;
-
-
-
-
+@property (nonatomic) BOOL autoZoom;
 
 @end
