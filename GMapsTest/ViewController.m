@@ -13,6 +13,7 @@
 #import "FMDatabase.h"
 #import "FMDatabaseAdditions.h"
 #import "AppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface ViewController ()
 
@@ -37,11 +38,19 @@
 @synthesize lastLocation;
 @synthesize maxHeight;
 @synthesize minHeight;
+@synthesize autoZoom;
 @synthesize speedArray;
 
 - (void)viewDidLoad {
     [Segment.layer setCornerRadius:7.0f];
+    [stats.layer setCornerRadius:7.0f];
+    [zoom.layer setCornerRadius:7.0f];
+    zoom.layer.borderWidth=1.0f;
+    zoom.layer.borderColor=[[UIColor colorWithRed:0 green:0 blue:1 alpha:.5] CGColor];
+    stats.layer.borderWidth=1.0f;
+    stats.layer.borderColor=[[UIColor colorWithRed:0 green:0 blue:1 alpha:.5] CGColor];
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    autoZoom=YES;
     // Create a GMSCameraPosition that tells the map to display the
     // coordinate -33.85,151.20 at zoom level 15.
     backgroundQueue = dispatch_queue_create("com.lundie.thread", NULL);
@@ -327,10 +336,20 @@
     polyline.map = mapView_;
     
     //Creates CoordinateBounds that show the entire path and sets camera to display those bounds
-    GMSCoordinateBounds *pathscreen = [[GMSCoordinateBounds alloc] initWithPath:path];
-    GMSCameraUpdate *pathcam = [GMSCameraUpdate fitBounds:pathscreen];
-    [mapView_ animateWithCameraUpdate:pathcam];
-    
+    if (autoZoom)
+    {
+        GMSCoordinateBounds *pathscreen = [[GMSCoordinateBounds alloc] initWithPath:path];
+        GMSCameraUpdate *pathcam = [GMSCameraUpdate fitBounds:pathscreen];
+        /*NSLog(@"%f, %f",fabs(pathscreen.northEast.latitude-pathscreen.southWest.latitude),fabs(pathscreen.northEast.longitude-pathscreen.southWest.longitude));*/
+        if (totalDistance>250) {
+            [mapView_ animateWithCameraUpdate:pathcam];
+        } else {
+            CLLocationCoordinate2D vancouver = CLLocationCoordinate2DMake(location.coordinate.latitude,location.coordinate.longitude);
+            GMSCameraUpdate *vancouverCam = [GMSCameraUpdate setTarget:vancouver zoom:17];
+            [mapView_ animateWithCameraUpdate:vancouverCam];
+        }
+    }
+
     NSDateFormatter *gmtDateFormatter = [[NSDateFormatter alloc] init];
     gmtDateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
     gmtDateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
@@ -412,15 +431,28 @@
     
     NSString *display = [NSNumberFormatter localizedStringFromNumber:@(totalDistance)
                                                          numberStyle:NSNumberFormatterDecimalStyle];
-    NSString *toastString = [NSString stringWithFormat:@"Total Distance: %@ %@ \n average speed: %.02f \n current speed: %.02f \n %@ %.2ld \n %@ %.2ld", display, @" m", [[speedArray valueForKeyPath:@"@avg.doubleValue"] doubleValue],  [[speedArray lastObject] doubleValue], @"Max Height", (long)maxHeight, @"Min Height", (long)minHeight];
+    NSString *toastString = [NSString stringWithFormat:@"Total Distance: %@ %@ \n Average Speed: %.02f \n Current Speed: %.02f \n %@ %.2ld \n %@ %.2ld", display, @" m", [[speedArray valueForKeyPath:@"@avg.doubleValue"] doubleValue],  [[speedArray lastObject] doubleValue], @"Max Height", (long)maxHeight, @"Min Height", (long)minHeight];
     //int aNum = 2000000;
     
     [self.view makeToast:toastString
-                duration:60
+                duration:30
                 position:[NSValue valueWithCGPoint:CGPointMake(160, 400)]];
     
     
 }
+
+- (IBAction)autoZoomOn:(id)sender {
+    if (autoZoom) {
+        autoZoom=NO;
+    } else {
+        autoZoom=YES;
+        GMSCoordinateBounds *pathscreen = [[GMSCoordinateBounds alloc] initWithPath:path];
+        GMSCameraUpdate *pathcam = [GMSCameraUpdate fitBounds:pathscreen];
+        [mapView_ animateWithCameraUpdate:pathcam];
+    }
+
+}
+
 - (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {
     // location services is probably not enabled for the app
     //self.strengthLabel.text = NSLocalizedString(@"Unable to determine location", @"");
